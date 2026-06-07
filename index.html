@@ -95,14 +95,17 @@
     .bar-fill.p2 { background: linear-gradient(90deg, var(--warn), var(--accent)); }
 
     /* 時間軸甘特圖 */
-    .gantt2 { position: relative; margin-top: 0.4em; padding-bottom: 34px; }
-    .g-phase { color: var(--accent); font-weight: 700; font-size: 0.42em; text-align: left; margin: 9px 0 3px; }
-    .g-task { margin: 4px 0; position: relative; z-index: 3; }
-    .g-name { font-size: 0.33em; color: #cfcfcf; text-align: left; margin-bottom: 2px; }
-    .g-track { position: relative; height: 13px; background: rgba(255,255,255,0.05); border-radius: 7px; }
-    .g-fill { position: absolute; height: 100%; border-radius: 7px; background: linear-gradient(90deg, var(--accent2), var(--accent)); }
+    .gantt2 { position: relative; margin-top: 0.3em; padding-bottom: 26px; }
+    .g-phase { color: var(--accent); font-weight: 700; font-size: 0.38em; text-align: left; margin: 5px 0 1px; }
+    .g-task { margin: 2px 0; position: relative; z-index: 3; }
+    .g-name { font-size: 0.3em; color: #cfcfcf; text-align: left; margin-bottom: 1px; display: flex; align-items: center; }
+    .g-mon { color: var(--accent2); font-weight: 700; margin-left: 8px; }
+    .g-track { position: relative; height: 10px; background: rgba(255,255,255,0.05); border-radius: 5px; }
+    .g-fill { position: absolute; height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--accent2), var(--accent)); }
     .g-fill.p2 { background: linear-gradient(90deg, var(--warn), var(--accent)); }
     .g-fill.eia { background: linear-gradient(90deg, #b388ff, #7c4dff); }
+    .g-fill.orig { background: linear-gradient(90deg, #90a4ae, #546e7a); }
+    .g-dur { width: 130px; height: 5px; margin: 0 0 0 12px; accent-color: var(--accent); cursor: pointer; }
     .g-buffer { position: absolute; top: 0; bottom: 30px; background: rgba(255,82,82,0.10); border-left: 1px dashed rgba(255,82,82,0.4); z-index: 1; }
     .g-buffer .gb-lbl { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); font-size: 0.3em; color: #ff8a80; white-space: nowrap; }
     .dday-line { position: absolute; top: 0; bottom: 30px; width: 0; border-left: 2px dashed #ff5252; z-index: 4; }
@@ -349,19 +352,13 @@
 
     <!-- 12. 分期開發時程 -->
     <section>
-      <h2>拾壹、分期開發預定時程（可模擬延誤）</h2>
-      <p style="font-size:0.4em; color:#ccc; margin:0 0 0.2em;">以 <b style="color:var(--accent2)">民國 115 年 7 月</b>為起點，第一期變更編定須俟<b style="color:#b388ff">環評通過</b>後始得進行。拖動下方滑桿模擬時程延誤，各期依相依關係順延 ▾</p>
+      <h2>拾壹、分期開發預定時程（可模擬調整）</h2>
+      <p style="font-size:0.38em; color:#ccc; margin:0 0 0.2em;">以 <b style="color:var(--accent2)">民國 115 年 7 月</b>為起點；須<b style="color:#b3c0c8">先取得原廠工廠登記證</b>、再經<b style="color:#b388ff">環評通過</b>，始得辦理第一期變更（全程<b>串接</b>，不併行）。拖動各階段下方<b>調整桿</b>改變月數，整體時程自動順延 ▾</p>
       <div id="tl-status" style="font-size:0.4em; font-weight:700; text-align:left; margin:2px 0 4px; min-height:1.2em;"></div>
       <div class="gantt2" id="tl-chart"></div>
-      <div style="display:flex; align-items:center; gap:12px; margin-top:6px;">
-        <span style="font-size:0.36em; color:var(--success); white-space:nowrap;">準時 1.0×</span>
-        <input id="tl-slider" type="range" min="100" max="300" value="100" style="flex:1; accent-color:var(--accent);">
-        <span style="font-size:0.36em; color:#ff8a80; white-space:nowrap;">嚴重延誤 3.0×</span>
-      </div>
-      <div class="note-box warn" style="font-size:0.38em; margin-top:8px;">
-        因山坡地累計逾 1 公頃須先完成<b style="color:#b388ff">環境影響評估</b>；第二期須俟
-        <b>第一期完工、工廠登記變更並合併登記</b>後方取得申請資格。全程
-        <b style="color:#ff8a80">必須於國土計畫法上路（D-day · 民國 120 年）前完成</b>——滑桿即顯示延誤如何使工程衝破 D-day。
+      <div class="note-box warn" style="font-size:0.36em; margin-top:6px;">
+        原廠須先取得<b>工廠登記證</b>方具毗連擴廠資格；山坡地累計逾 1 公頃須先完成<b style="color:#b388ff">環評</b>；第二期須俟
+        <b>第一期完工並合併登記</b>後始得申請。全程<b style="color:#ff8a80">必須於國土計畫法上路（D-day · 民國 120 年）前完成</b>——調整各階段月數即顯示整體是否衝破 D-day。
       </div>
     </section>
 
@@ -438,77 +435,70 @@
     controls: true, slideNumber: 'c/t', plugins: []
   });
 
-  // === 互動時程甘特圖 ===
+  // === 互動時程甘特圖（每階段可調月數） ===
   (function(){
-    var DDAY = 54;            // 民國120年1月 = 起點(115/07)後第 54 個月
+    var DDAY = 54;               // 民國120年1月 = 起點(115/07)後第 54 個月
     var START_ABS = 115*12 + 6;  // 115/07 的絕對月
-    // dep: 'parallel' 與前置同時起算；'eia' 須環評通過後；'prev' 接續上一項
     var PHASES = [
-      {name:'環境影響說明書製作及審查', grp:'環評階段（山坡地累計逾 1 公頃）', base:16, dep:'start', cls:'eia'},
-      {name:'計畫書送審及水保審查',     grp:'第一期（668 地號 · 毗連丁建變更）', base:6,  dep:'start', cls:''},
-      {name:'核發毗連證明與變更編定',   grp:'第一期（668 地號 · 毗連丁建變更）', base:6,  dep:'eia',  cls:''},
-      {name:'廠房興建與工廠登記變更',   grp:'第一期（668 地號 · 毗連丁建變更）', base:10, dep:'prev', cls:''},
-      {name:'第二期變更計畫送審',       grp:'第二期（672 地號 · 毗連丁建變更）', base:4,  dep:'prev', cls:'p2'},
-      {name:'核發二期證明與變更編定',   grp:'第二期（672 地號 · 毗連丁建變更）', base:4,  dep:'prev', cls:'p2'},
-      {name:'廠房擴建與最終投產',       grp:'第二期（672 地號 · 毗連丁建變更）', base:8,  dep:'prev', cls:'p2'}
+      {name:'原廠建廠及取得工廠登記證', grp:'原廠籌建（669 地號 · 既有丁建）',   base:24, min:18, max:30, dep:'start', cls:'orig'},
+      {name:'環境影響說明書製作及審查', grp:'環評階段（山坡地累計逾 1 公頃）',   base:16, min:6,  max:36, dep:'prev',  cls:'eia'},
+      {name:'計畫書送審及水保審查',     grp:'第一期（668 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:''},
+      {name:'核發毗連證明與變更編定',   grp:'第一期（668 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:''},
+      {name:'廠房興建與工廠登記變更',   grp:'第一期（668 地號 · 毗連丁建變更）', base:18, min:12, max:30, dep:'prev',  cls:''},
+      {name:'第二期變更計畫送審',       grp:'第二期（672 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:'p2'},
+      {name:'核發二期證明與變更編定',   grp:'第二期（672 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:'p2'},
+      {name:'廠房擴建與最終投產',       grp:'第二期（672 地號 · 毗連丁建變更）', base:18, min:12, max:30, dep:'prev',  cls:'p2'}
     ];
+    var dur = PHASES.map(function(p){ return p.base; });
+    var chart = document.getElementById('tl-chart');
+    if(!chart) return;
+    // 一次建立結構（含每階段調整桿）
+    var html='', lastGrp=null;
+    for(var i=0;i<PHASES.length;i++){
+      var p=PHASES[i];
+      if(p.grp!==lastGrp){ html+='<div class="g-phase">'+p.grp+'</div>'; lastGrp=p.grp; }
+      html+='<div class="g-task">'+
+        '<div class="g-name">'+p.name+'<b class="g-mon" id="mon'+i+'"></b>'+
+        '<input class="g-dur" type="range" min="'+p.min+'" max="'+p.max+'" value="'+p.base+'" data-idx="'+i+'"></div>'+
+        '<div class="g-track"><div class="g-fill '+p.cls+'" id="fill'+i+'"></div></div>'+
+        '</div>';
+    }
+    html+='<div class="g-buffer" id="tl-buffer"><span class="gb-lbl">國土法上路後 · 變更編定關閉</span></div>';
+    html+='<div class="dday-line" id="tl-dline"></div>';
+    html+='<div class="dday-flag" id="tl-dflag">🚩 國土計畫法上路 D-day｜民國 120 年</div>';
+    html+='<div class="g-axis" id="tl-axis"></div>';
+    chart.innerHTML=html;
+
     function ym(m){ var a=START_ABS+Math.round(m); return '民國 '+Math.floor(a/12)+' 年 '+(a%12+1)+' 月'; }
-    function render(f){
-      var st=[], en=[], eiaEnd=0;
-      for(var i=0;i<PHASES.length;i++){
-        var p=PHASES[i], dur=p.base*f, s=0;
-        if(p.dep==='start') s=0;
-        else if(p.dep==='eia') s=eiaEnd;
-        else if(p.dep==='prev') s=en[i-1];
-        st[i]=s; en[i]=s+dur;
-        if(p.cls==='eia') eiaEnd=en[i];
-      }
-      var total=Math.max.apply(null,en);
+    function update(){
+      var st=[], en=[];
+      for(var i=0;i<PHASES.length;i++){ var s=(PHASES[i].dep==='start')?0:en[i-1]; st[i]=s; en[i]=s+dur[i]; }
+      var total=en[en.length-1];
       var axisMax=Math.max(total, DDAY+3);
-      axisMax=Math.ceil((axisMax-6)/12)*12+6;       // 對齊到 民國年 邊界
-      var ddayPct=DDAY/axisMax*100;
-      var html='';
-      var lastGrp=null;
+      axisMax=Math.ceil((axisMax-6)/12)*12+6;        // 對齊 民國年 邊界
+      var dpct=DDAY/axisMax*100;
       for(var i=0;i<PHASES.length;i++){
-        var p=PHASES[i];
-        if(p.grp!==lastGrp){ html+='<div class="g-phase">'+p.grp+'</div>'; lastGrp=p.grp; }
-        var l=st[i]/axisMax*100, w=(en[i]-st[i])/axisMax*100;
-        html+='<div class="g-task"><div class="g-name">'+p.name+'</div><div class="g-track"><div class="g-fill '+p.cls+'" style="left:'+l.toFixed(2)+'%;width:'+w.toFixed(2)+'%"></div></div></div>';
+        var f=document.getElementById('fill'+i);
+        f.style.left=(st[i]/axisMax*100).toFixed(2)+'%';
+        f.style.width=(dur[i]/axisMax*100).toFixed(2)+'%';
+        document.getElementById('mon'+i).textContent=dur[i]+' 個月';
       }
-      // 關閉區 + D-day 線 + 旗標
-      html+='<div class="g-buffer" style="left:'+ddayPct.toFixed(2)+'%; right:0;"><span class="gb-lbl">國土法上路後 · 變更編定關閉</span></div>';
-      html+='<div class="dday-line" style="left:'+ddayPct.toFixed(2)+'%;"></div>';
-      html+='<div class="dday-flag" style="left:'+ddayPct.toFixed(2)+'%; transform:translateX(-100%); margin-left:-6px;">🚩 國土計畫法上路 D-day｜民國 120 年</div>';
-      // 年月軸
-      html+='<div class="g-axis"><span class="tk" style="left:0%;"></span><span class="tl-lbl" style="left:0%; transform:none;">115/07</span>';
+      document.getElementById('tl-buffer').style.left=dpct.toFixed(2)+'%';
+      document.getElementById('tl-dline').style.left=dpct.toFixed(2)+'%';
+      document.getElementById('tl-dflag').style.left=dpct.toFixed(2)+'%';
+      var ax='<span class="tk" style="left:0%;"></span><span class="tl-lbl" style="left:0%; transform:none;">115/07</span>';
       for(var mo=6; mo<=axisMax-2; mo+=12){
-        var roc=Math.floor((START_ABS+mo)/12);
-        var pct=mo/axisMax*100;
-        var isD=(mo===DDAY);
-        html+='<span class="tk" style="left:'+pct.toFixed(2)+'%;"></span>';
-        html+='<span class="tl-lbl'+(isD?' dday':'')+'" style="left:'+pct.toFixed(2)+'%;">'+roc+(isD?' D-day':'')+'</span>';
+        var roc=Math.floor((START_ABS+mo)/12), pct=mo/axisMax*100, isD=(mo===DDAY);
+        ax+='<span class="tk" style="left:'+pct.toFixed(2)+'%;"></span><span class="tl-lbl'+(isD?' dday':'')+'" style="left:'+pct.toFixed(2)+'%;">'+roc+(isD?' D-day':'')+'</span>';
       }
-      html+='</div>';
-      document.getElementById('tl-chart').innerHTML=html;
-      // 狀態列
-      var stt=document.getElementById('tl-status');
-      var over=total-DDAY;
-      if(over>0.5){
-        stt.style.color='#ff5252';
-        stt.innerHTML='⚠ 全部完工：'+ym(total)+'　已超過 D-day 約 <b>'+Math.round(over)+'</b> 個月 → 變更編定恐被永久關閉';
-      } else {
-        stt.style.color='var(--success)';
-        stt.innerHTML='✓ 全部完工：'+ym(total)+'　於 D-day 前完成，餘裕 <b>'+Math.round(-over)+'</b> 個月';
-      }
+      document.getElementById('tl-axis').innerHTML=ax;
+      var stt=document.getElementById('tl-status'), over=total-DDAY;
+      if(over>0.5){ stt.style.color='#ff5252'; stt.innerHTML='⚠ 全部完工：'+ym(total)+'（自起算 '+Math.round(total)+' 個月）　超過 D-day 約 <b>'+Math.round(over)+'</b> 個月 → 變更編定恐被永久關閉'; }
+      else { stt.style.color='var(--success)'; stt.innerHTML='✓ 全部完工：'+ym(total)+'（自起算 '+Math.round(total)+' 個月）　於 D-day 前完成，餘裕 <b>'+Math.round(-over)+'</b> 個月'; }
     }
-    var sl=document.getElementById('tl-slider');
-    if(sl){
-      var run=function(){ render(+sl.value/100); };
-      sl.addEventListener('input', run);
-      run();
-      // 切到該頁時重繪一次（確保尺寸正確）
-      if(window.Reveal) Reveal.on('slidechanged', function(e){ if(e.currentSlide&&e.currentSlide.querySelector&&e.currentSlide.querySelector('#tl-chart')) run(); });
-    }
+    chart.addEventListener('input', function(e){ var t=e.target; if(t.classList&&t.classList.contains('g-dur')){ dur[+t.getAttribute('data-idx')]=+t.value; update(); } });
+    update();
+    if(window.Reveal) Reveal.on('slidechanged', function(e){ if(e.currentSlide&&e.currentSlide.querySelector&&e.currentSlide.querySelector('#tl-chart')) update(); });
   })();
 </script>
 </body>
