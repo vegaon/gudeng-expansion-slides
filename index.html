@@ -95,17 +95,18 @@
     .bar-fill.p2 { background: linear-gradient(90deg, var(--warn), var(--accent)); }
 
     /* 時間軸甘特圖 */
-    .gantt2 { position: relative; margin-top: 0.3em; padding-bottom: 26px; }
-    .g-phase { color: var(--accent); font-weight: 700; font-size: 0.38em; text-align: left; margin: 5px 0 1px; }
-    .g-task { margin: 2px 0; position: relative; z-index: 3; }
-    .g-name { font-size: 0.3em; color: #cfcfcf; text-align: left; margin-bottom: 1px; display: flex; align-items: center; }
-    .g-mon { color: var(--accent2); font-weight: 700; margin-left: 8px; }
+    .gantt2 { position: relative; margin-top: 0.25em; padding-bottom: 24px; }
+    .g-phase { color: var(--accent); font-weight: 700; font-size: 0.36em; text-align: left; margin: 4px 0 1px; }
+    .g-task { margin: 1px 0; position: relative; z-index: 3; }
+    .g-name { font-size: 0.3em; color: #cfcfcf; margin-bottom: 1px; display: flex; align-items: center; }
+    .g-nm { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .g-mon { color: var(--accent2); font-weight: 700; width: 52px; text-align: right; white-space: nowrap; flex: none; margin: 0 12px 0 8px; }
     .g-track { position: relative; height: 10px; background: rgba(255,255,255,0.05); border-radius: 5px; }
     .g-fill { position: absolute; height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--accent2), var(--accent)); }
     .g-fill.p2 { background: linear-gradient(90deg, var(--warn), var(--accent)); }
     .g-fill.eia { background: linear-gradient(90deg, #b388ff, #7c4dff); }
     .g-fill.orig { background: linear-gradient(90deg, #90a4ae, #546e7a); }
-    .g-dur { width: 130px; height: 5px; margin: 0 0 0 12px; accent-color: var(--accent); cursor: pointer; }
+    .g-dur { width: 130px; height: 5px; flex: none; margin: 0; accent-color: var(--accent); cursor: pointer; }
     .g-buffer { position: absolute; top: 0; bottom: 30px; background: rgba(255,82,82,0.10); border-left: 1px dashed rgba(255,82,82,0.4); z-index: 1; }
     .g-buffer .gb-lbl { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); font-size: 0.3em; color: #ff8a80; white-space: nowrap; }
     .dday-line { position: absolute; top: 0; bottom: 30px; width: 0; border-left: 2px dashed #ff5252; z-index: 4; }
@@ -357,7 +358,7 @@
       <div id="tl-status" style="font-size:0.4em; font-weight:700; text-align:left; margin:2px 0 4px; min-height:1.2em;"></div>
       <div class="gantt2" id="tl-chart"></div>
       <div class="note-box warn" style="font-size:0.36em; margin-top:6px;">
-        原廠須先取得<b>工廠登記證</b>方具毗連擴廠資格；山坡地累計逾 1 公頃須先完成<b style="color:#b388ff">環評</b>；第二期須俟
+        原廠須先取得<b>工廠登記證</b>方具毗連擴廠資格；因山坡地逾 1 公頃，<b style="color:#b388ff">第一、二期各須先完成環評</b>；第二期須俟
         <b>第一期完工並合併登記</b>後始得申請。全程<b style="color:#ff8a80">必須於國土計畫法上路（D-day · 民國 120 年）前完成</b>——調整各階段月數即顯示整體是否衝破 D-day。
       </div>
     </section>
@@ -440,14 +441,15 @@
     var DDAY = 54;               // 民國120年1月 = 起點(115/07)後第 54 個月
     var START_ABS = 115*12 + 6;  // 115/07 的絕對月
     var PHASES = [
-      {name:'原廠建廠及取得工廠登記證', grp:'原廠籌建（669 地號 · 既有丁建）',   base:24, min:18, max:30, dep:'start', cls:'orig'},
-      {name:'環境影響說明書製作及審查', grp:'環評階段（山坡地累計逾 1 公頃）',   base:16, min:6,  max:36, dep:'prev',  cls:'eia'},
-      {name:'計畫書送審及水保審查',     grp:'第一期（668 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:''},
-      {name:'核發毗連證明與變更編定',   grp:'第一期（668 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:''},
-      {name:'廠房興建與工廠登記變更',   grp:'第一期（668 地號 · 毗連丁建變更）', base:18, min:12, max:30, dep:'prev',  cls:''},
-      {name:'第二期變更計畫送審',       grp:'第二期（672 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:'p2'},
-      {name:'核發二期證明與變更編定',   grp:'第二期（672 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:'p2'},
-      {name:'廠房擴建與最終投產',       grp:'第二期（672 地號 · 毗連丁建變更）', base:18, min:12, max:30, dep:'prev',  cls:'p2'}
+      {name:'原廠建廠及取得工廠登記證',     grp:'原廠籌建（669 地號 · 既有丁建）',   base:24, min:18, max:30, dep:'start', cls:'orig'},
+      {name:'環境影響說明書製作及審查',     grp:'第一期（668 地號 · 毗連丁建變更）', base:16, min:6,  max:36, dep:'prev',  cls:'eia'},
+      {name:'計畫書送審及水保審查',         grp:'第一期（668 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:''},
+      {name:'核發毗連證明與變更編定',       grp:'第一期（668 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:''},
+      {name:'廠房興建與工廠登記變更',       grp:'第一期（668 地號 · 毗連丁建變更）', base:18, min:12, max:30, dep:'prev',  cls:''},
+      {name:'環境影響說明書製作及審查',     grp:'第二期（672 地號 · 毗連丁建變更）', base:18, min:6,  max:36, dep:'prev',  cls:'eia'},
+      {name:'第二期變更計畫送審',           grp:'第二期（672 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:'p2'},
+      {name:'核發二期證明與變更編定',       grp:'第二期（672 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:'p2'},
+      {name:'廠房擴建與最終投產',           grp:'第二期（672 地號 · 毗連丁建變更）', base:18, min:12, max:30, dep:'prev',  cls:'p2'}
     ];
     var dur = PHASES.map(function(p){ return p.base; });
     var chart = document.getElementById('tl-chart');
@@ -458,7 +460,7 @@
       var p=PHASES[i];
       if(p.grp!==lastGrp){ html+='<div class="g-phase">'+p.grp+'</div>'; lastGrp=p.grp; }
       html+='<div class="g-task">'+
-        '<div class="g-name">'+p.name+'<b class="g-mon" id="mon'+i+'"></b>'+
+        '<div class="g-name"><span class="g-nm">'+p.name+'</span><b class="g-mon" id="mon'+i+'"></b>'+
         '<input class="g-dur" type="range" min="'+p.min+'" max="'+p.max+'" value="'+p.base+'" data-idx="'+i+'"></div>'+
         '<div class="g-track"><div class="g-fill '+p.cls+'" id="fill'+i+'"></div></div>'+
         '</div>';
