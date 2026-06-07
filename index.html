@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>家登精密花壇廠區擴展計畫｜興辦工業人使用毗連非都市土地擴展計畫</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" />
+  <style>
+    :root {
+      --accent:  #e8643a;
+      --accent2: #4fc3f7;
+      --success: #81c784;
+      --warn:    #ffb74d;
+    }
+    .reveal { font-family: 'Segoe UI', 'Noto Sans TC', sans-serif; }
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-family: 'Segoe UI', 'Noto Sans TC', sans-serif;
+      font-weight: 700; letter-spacing: -0.02em;
+    }
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.4em; color: var(--accent2); }
+    .reveal h3 { font-size: 0.9em; color: var(--accent); }
+    .reveal .progress { color: var(--accent); }
+    .reveal .fragment { opacity: 0.2; }
+    .reveal .fragment.visible { opacity: 1; }
+
+    /* 封面 */
+    .title-slide { text-align: center; }
+    .title-slide .tag {
+      display: inline-block; background: var(--accent); color: #fff;
+      padding: 5px 16px; border-radius: 20px; font-size: 0.5em;
+      letter-spacing: 0.08em; margin-bottom: 0.9em; font-weight: 600;
+    }
+    .title-slide .subtitle { font-size: 0.66em; color: #bbb; margin-top: 0.6em; line-height: 1.6; }
+    .title-slide .author { margin-top: 1.6em; font-size: 0.46em; color: #888; line-height: 1.8; }
+
+    /* 統計卡 */
+    .stat-row { display: flex; gap: 18px; justify-content: center; margin-top: 0.8em; }
+    .stat-card {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px; padding: 18px 22px; text-align: center; flex: 1;
+    }
+    .stat-card .num { font-size: 1.6em; font-weight: 800; color: var(--accent); line-height: 1; }
+    .stat-card .label { font-size: 0.4em; color: #ccc; margin-top: 8px; line-height: 1.4; }
+
+    /* 優勢卡 */
+    .adv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 0.6em; }
+    .adv-grid.cols4 { grid-template-columns: repeat(4, 1fr); }
+    .adv-card {
+      background: rgba(255,255,255,0.05); border-top: 4px solid var(--accent2);
+      border-radius: 8px; padding: 16px; text-align: center;
+    }
+    .adv-card .adv-icon img {
+      width: 60px; height: 60px; object-fit: contain; display: block; margin: 0 auto 8px;
+      filter: drop-shadow(0 0 10px rgba(79,195,247,0.6));
+    }
+    .adv-card .adv-title { font-size: 0.46em; font-weight: 700; color: var(--accent2); margin-bottom: 6px; }
+    .adv-card .adv-desc { font-size: 0.36em; color: #bbb; line-height: 1.55; }
+
+    /* 表格 */
+    .reveal table { font-size: 0.4em; margin: 0.4em auto; border-collapse: collapse; width: 100%; }
+    .reveal table th { background: rgba(232,100,58,0.25); color: #fff; padding: 7px 9px; border: 1px solid rgba(255,255,255,0.15); }
+    .reveal table td { padding: 6px 9px; border: 1px solid rgba(255,255,255,0.1); color: #ddd; }
+    .reveal table tr.hl td { background: rgba(79,195,247,0.14); color: #fff; font-weight: 700; }
+    .reveal table tr.total td { background: rgba(232,100,58,0.18); color: #fff; font-weight: 700; }
+
+    /* 提示框 */
+    .note-box {
+      background: rgba(255,255,255,0.05); border-left: 4px solid var(--accent);
+      border-radius: 8px; padding: 16px 20px; margin: 0.6em 0; font-size: 0.46em;
+      color: #ddd; line-height: 1.7; text-align: left;
+    }
+    .note-box.ok { border-left-color: var(--success); }
+    .note-box.warn { border-left-color: var(--warn); }
+    .note-box b { color: var(--accent2); }
+
+    /* 兩欄 */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: center; }
+    .two-col img { width: 100%; border-radius: 10px; border: 1px solid rgba(255,255,255,0.15); }
+    .cap { font-size: 0.36em; color: #888; margin-top: 6px; text-align: center; }
+
+    /* 清單 */
+    .reveal .slides ul.clean { list-style: none; padding: 0; font-size: 0.46em; line-height: 1.9; text-align: left; }
+    .reveal .slides ul.clean li::before { content: "▸ "; color: var(--accent); font-weight: 700; }
+
+    /* 時間軸 */
+    .gantt { font-size: 0.4em; margin-top: 0.6em; }
+    .gantt .phase-title { color: var(--accent); font-weight: 700; font-size: 1.2em; margin: 10px 0 4px; text-align: left; }
+    .bar-row { display: grid; grid-template-columns: 200px 1fr; gap: 10px; align-items: center; margin: 5px 0; }
+    .bar-row .lbl { text-align: right; color: #ccc; }
+    .bar-track { position: relative; height: 18px; background: rgba(255,255,255,0.05); border-radius: 9px; }
+    .bar-fill { position: absolute; height: 100%; border-radius: 9px; background: linear-gradient(90deg, var(--accent2), var(--accent)); }
+    .bar-fill.p2 { background: linear-gradient(90deg, var(--warn), var(--accent)); }
+
+    /* VIZ */
+    .viz-wrap { position: relative; height: 340px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15); margin-top: 0.4em; }
+    .viz-layer { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; }
+    .viz-before { background: linear-gradient(135deg, #3a1c1c, #2a1010); }
+    .viz-after { background: linear-gradient(135deg, #14342a, #0d2620); clip-path: inset(0 100% 0 0); }
+    .viz-layer .vbig { font-size: 1.6em; font-weight: 800; }
+    .viz-layer .vsub { font-size: 0.5em; color: #ddd; margin-top: 10px; line-height: 1.6; }
+    .viz-label { position: absolute; top: 10px; font-size: 0.42em; font-weight: 700; padding: 3px 10px; border-radius: 6px; z-index: 5; }
+    .viz-divider { position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(to bottom, transparent, var(--accent2), transparent); box-shadow: 0 0 12px var(--accent2); pointer-events: none; }
+    input[type=range] { width: 80%; margin-top: 16px; accent-color: var(--accent2); }
+
+    .end-slide { text-align: center; }
+    .end-slide .tagline { font-size: 0.56em; color: #bbb; line-height: 1.8; margin-top: 0.6em; }
+    .src { font-size: 0.3em; color: #666; margin-top: 1em; }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- 1. 封面 -->
+    <section data-background-image="images/cover.png" data-background-opacity="0.38" data-background-size="cover">
+      <div class="title-slide">
+        <div class="tag">興辦工業人使用毗連非都市土地擴展計畫</div>
+        <h1>家登精密花壇廠區擴展計畫</h1>
+        <h2 style="color:var(--accent); margin-top:0.3em;">非都市土地使用地變更編定案</h2>
+        <p class="subtitle">彰化縣花壇鄉三家段 668、672 地號<br>變更編定為丁種建築用地暨交通用地</p>
+        <p class="author">申請人：家登精密工業股份有限公司（股票代號 3680）<br>簡報日期：中華民國 115 年</p>
+      </div>
+    </section>
+
+    <!-- 2. 計畫緣由與目的 -->
+    <section data-background-image="images/purpose.png" data-background-opacity="0.22" data-background-size="cover">
+      <h2>壹、計畫緣由與目的</h2>
+      <div class="note-box">
+        配合全球半導體先進製程（3nm、2nm 及以下）產能擴張，本公司關鍵半導體傳載載具
+        （EUV Pod 光罩傳送盒、FOUP 晶圓傳送盒）產能已達高度滿載。為進行
+        <b>產線異地備援</b>並建置<b>先進封裝載具（PLP Carrier）新事業生產基地</b>，
+        需以既有花壇廠區為基礎進行毗連擴建。
+      </div>
+      <ul class="clean">
+        <li>以既有合法廠區（669 地號丁種建築用地）為核心，毗連擴展</li>
+        <li>引進<b>低污染</b>之高精密射出成型與無塵室潔淨裝配製程</li>
+        <li>共用既有公用設施，提升能源使用效率、減少重複投資</li>
+        <li>分期、分用途規劃土地，兼顧產能需求與土地使用合規</li>
+      </ul>
+    </section>
+
+    <!-- 3. 申請人基本資料 -->
+    <section>
+      <h2>貳、申請人基本資料</h2>
+      <div class="stat-row">
+        <div class="stat-card"><div class="num">1998</div><div class="label">設立年（民國 87 年）</div></div>
+        <div class="stat-card"><div class="num">15<span style="font-size:0.5em">億</span></div><div class="label">資本總額（實收 9.6 億）</div></div>
+        <div class="stat-card"><div class="num">3680</div><div class="label">上市公司股票代號</div></div>
+      </div>
+      <div class="adv-grid cols4" style="margin-top:1em;">
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_euvpod.png" alt=""></div><div class="adv-title">EUV Pod</div><div class="adv-desc">極紫外光光罩傳送盒</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_foup.png" alt=""></div><div class="adv-title">FOUP</div><div class="adv-desc">前開式晶圓傳送盒</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_molding.png" alt=""></div><div class="adv-title">精密射出</div><div class="adv-desc">高精密全電式成型</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_cleanroom.png" alt=""></div><div class="adv-title">無塵室製程</div><div class="adv-desc">Class 10/100 潔淨裝配</div></div>
+      </div>
+      <div class="note-box" style="font-size:0.4em;">
+        統一編號 16406379｜負責人 邱銘乾｜登記地址 新北市土城區中央路四段 2 號 9 樓之 5
+      </div>
+    </section>
+
+    <!-- 4. 申請基地概況 -->
+    <section>
+      <h2>參、申請基地概況</h2>
+      <table>
+        <thead><tr><th>類別</th><th>地段地號</th><th>面積(㎡)</th><th>面積(坪)</th><th>使用分區</th><th>使用地類別</th><th>規劃用途</th></tr></thead>
+        <tbody>
+          <tr><td>原有廠地</td><td>三家段 669</td><td>7,702.06</td><td>2,329.87</td><td>山坡地保育區</td><td>丁種建築用地</td><td>既有原廠房</td></tr>
+          <tr class="hl"><td>新增(西)</td><td>三家段 668</td><td>9,792.57</td><td>2,962.25</td><td>山坡地保育區</td><td>農牧用地</td><td>第一期 毗連丁建變更</td></tr>
+          <tr class="hl"><td>新增(東)</td><td>三家段 672</td><td>19,424.84</td><td>5,876.01</td><td>山坡地保育區</td><td>農牧用地</td><td>第二期 交通用地變更</td></tr>
+          <tr class="total"><td>變更合計</td><td>668、672</td><td>29,217.41</td><td>8,838.26</td><td>—</td><td>—</td><td>約 2.92 公頃</td></tr>
+          <tr class="total"><td>原廠＋新增</td><td>668、669、672</td><td>36,919.47</td><td>11,168.13</td><td>—</td><td>—</td><td>約 3.69 公頃</td></tr>
+        </tbody>
+      </table>
+      <div class="note-box ok">
+        三筆土地均為<b>家登精密自有</b>，免附變更編定同意書。668 緊鄰 669 東南側、672 緊鄰 668 東側，
+        相互銜接、無道路水路阻隔，具<b>實質毗連</b>物理條件。
+      </div>
+    </section>
+
+    <!-- 5. 鄰近土地使用現況 -->
+    <section>
+      <h2>肆、鄰近土地使用現況分析</h2>
+      <div class="two-col">
+        <div>
+          <img src="images/cadastral_analysis.png" alt="地籍分區分析圖">
+          <div class="cap">三家段 668、672 地號地籍分區色碼分析圖</div>
+        </div>
+        <div>
+          <ul class="clean" style="font-size:0.42em;">
+            <li>🟥 <b>丁種建築用地</b>：669 原廠、677</li>
+            <li>🟩 <b>農牧用地</b>：周邊 667、671、673~675、679、681、682 等</li>
+            <li>⬛ <b>殯葬用地</b>：東北 676、東側 680（公墓周邊地帶）</li>
+            <li>🟨 <b>變更標的</b>：668（丁建）、672（交通用地）</li>
+          </ul>
+          <div class="note-box" style="font-size:0.4em;">
+            周邊多為農牧用地，廠區排水須採<b>灌排實質分流</b>；東側鄰殯葬用地，
+            規劃留設遮蔽型隔離綠帶。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. 法規依據架構 -->
+    <section>
+      <h2>伍、法規依據架構</h2>
+      <div class="adv-grid cols4">
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_law.png" alt=""></div><div class="adv-title">毗連審查辦法</div><div class="adv-desc">興辦工業人使用毗連非都市土地擴展計畫申請審查辦法（第4、5條核心門檻）</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_landrule.png" alt=""></div><div class="adv-title">非都市土地<br>使用管制規則</div><div class="adv-desc">第 27、28、31、49-1、54 條：變更編定依據與山坡地審查</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_water.png" alt=""></div><div class="adv-title">水土保持法<br>與水利法</div><div class="adv-desc">山坡地水保計畫、2 公頃以上出流管制計畫</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_eco.png" alt=""></div><div class="adv-title">環評與<br>環境敏感地</div><div class="adv-desc">山坡地 1 公頃環評門檻、62 項環境敏感地查詢</div></div>
+      </div>
+      <div class="note-box">
+        另涉<b>產業創新條例第 65、66 條</b>（回饋金與計畫管制）、<b>區域計畫法</b>、
+        <b>工廠管理輔導法</b>，並依<b>彰化縣</b>地方規費與審查實務辦理。
+      </div>
+    </section>
+
+    <!-- 7. 分期開發規劃 -->
+    <section>
+      <h2>陸、分期開發規劃</h2>
+      <div class="adv-grid">
+        <div class="adv-card" style="border-top-color:var(--accent2);">
+          <div class="adv-icon"><img src="images/icon_building.png" alt=""></div>
+          <div class="adv-title" style="font-size:0.6em;">第一期 ── 668 地號</div>
+          <div class="adv-desc" style="font-size:0.42em;">
+            毗連<b>丁種建築用地</b>變更<br>面積 9,792.57 ㎡（約 0.98 公頃）<br>
+            供生產線擴建，與 669 原廠房無縫連線
+          </div>
+        </div>
+        <div class="adv-card" style="border-top-color:var(--warn);">
+          <div class="adv-icon"><img src="images/icon_buffer.png" alt=""></div>
+          <div class="adv-title" style="font-size:0.6em;">第二期 ── 672 地號</div>
+          <div class="adv-desc" style="font-size:0.42em;">
+            獨立申請<b>交通用地</b>（路外停車場）<br>面積 19,424.84 ㎡（約 1.94 公頃）<br>
+            供員工停車、車輛調度與物流轉運
+          </div>
+        </div>
+      </div>
+      <div class="note-box ok">
+        將<b>生產區（丁建）</b>與<b>車輛停放及調度區（交通用地）</b>在土地權屬上做功能區隔，
+        既滿足擴建產能需求，又使土地使用配置合理化，並符合各自之審查路徑與法規限制。
+      </div>
+    </section>
+
+    <!-- 8. 面積與比例合規性 [VIZ] -->
+    <section>
+      <h2>柒、面積與比例合規性</h2>
+      <p style="font-size:0.46em; color:#ccc;">依毗連審查辦法第 5 條：申請變更面積原則不得超過原廠土地總面積 <b style="color:var(--warn)">1.5 倍</b>，且申請以 <b style="color:var(--warn)">2 次</b>為限。拖曳滑桿檢視分期合規方案 ▾</p>
+      <div class="viz-wrap">
+        <div class="viz-layer viz-before" id="viz-before">
+          <div class="vbig" style="color:var(--warn)">一次送審 ✕</div>
+          <div class="vsub">29,217.41 ㎡ ÷ 原廠 7,702.06 ㎡<br>＝ <b style="color:var(--warn)">約 3.79 倍</b>，遠超 1.5 倍上限 → 退件</div>
+        </div>
+        <div class="viz-layer viz-after" id="viz-after">
+          <div class="vbig" style="color:var(--success)">分期送審 ✓</div>
+          <div class="vsub">
+            第一期 668：9,792.57 ㎡ ÷ 669 原廠 7,702.06 ㎡ ＝ <b style="color:var(--success)">1.27 倍</b> ✓<br>
+            合併後原廠增至 17,494.63 ㎡<br>
+            第二期 672 改走交通用地，<b style="color:var(--success)">不受 1.5 倍限制</b> ✓<br>
+            累計申請 2 次，符合「以二次為限」
+          </div>
+        </div>
+        <div class="viz-label left" style="left:10px; background:rgba(129,199,132,0.25); color:var(--success)">合規方案</div>
+        <div class="viz-label right" style="right:10px; background:rgba(255,183,77,0.25); color:var(--warn)">問題</div>
+        <div class="viz-divider" id="viz-divider"></div>
+      </div>
+      <input id="viz-slider" type="range" min="0" max="100" value="0">
+    </section>
+
+    <!-- 9. 土地使用強度與配置 -->
+    <section>
+      <h2>捌、土地使用強度與配置</h2>
+      <div class="adv-grid cols4">
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_coverage.png" alt=""></div><div class="adv-title">建蔽率</div><div class="adv-desc">上限 60%<br>規劃 <b>48.5%</b></div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_floors.png" alt=""></div><div class="adv-title">容積率</div><div class="adv-desc">上限 180%<br>規劃 <b>120%</b>（地上三層）</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_green.png" alt=""></div><div class="adv-title">綠地</div><div class="adv-desc">變更面積 <b>10%</b><br>變更為國土保安用地</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_belt.png" alt=""></div><div class="adv-title">隔離綠帶</div><div class="adv-desc">變更面積 <b>30%</b><br>帶狀本土喬木綠帶</div></div>
+      </div>
+      <div class="note-box">
+        沿基地外圍（特別是東南側鄰農地、東側鄰殯葬用地）留設帶狀隔離綠帶，
+        擋土牆<b>退縮地界</b>、圍籬採透空設計，種植台灣肖楠、樟樹、光蠟樹等遮蔽喬木，
+        兼顧景觀隔離與鄰地農業生產環境維護。
+      </div>
+    </section>
+
+    <!-- 10. 環境影響與灌排分流 -->
+    <section>
+      <h2>玖、環境影響與灌排分流</h2>
+      <div class="two-col" style="grid-template-columns:1fr 1fr;">
+        <div class="note-box" style="border-left-color:var(--accent2);">
+          <h3>雨水與山坡地逕流</h3>
+          周邊設截沙溝與雨水收集管，導引山坡地雨水繞行廠區，
+          經滯洪沉砂池處理後排入既有天然排洪溝渠，<b>絕不流入鄰近農田</b>。
+        </div>
+        <div class="note-box" style="border-left-color:var(--success);">
+          <h3>製程廢水與生活污水</h3>
+          經廠內自建廢水處理站（中和＋沉澱＋多介質過濾＋RO 回收）處理至符合
+          放流水標準後<b>以專管外排</b>，<b>嚴禁排入灌溉渠道</b>。
+        </div>
+      </div>
+      <div class="note-box warn">
+        彰化為農業大縣，依地方審查實務嚴格要求廢污水與農業灌溉排水系統<b>實質分流</b>；
+        本案以灌排分流設計確保不影響鄰近農業生產環境。
+      </div>
+    </section>
+
+    <!-- 11. 山坡地保育與環境敏感 -->
+    <section>
+      <h2>拾、山坡地保育與環境敏感</h2>
+      <div class="adv-grid cols4">
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_recycle.png" alt=""></div><div class="adv-title">水土保持計畫</div><div class="adv-desc">委託技師編製水保計畫書，送彰化縣水利資源處核定</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_pond.png" alt=""></div><div class="adv-title">生態滯洪沉砂池</div><div class="adv-desc">配置地下式生態滯洪沉砂池，落實出流管制</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_check.png" alt=""></div><div class="adv-title">環境敏感地查詢</div><div class="adv-desc">完成 62 項一、二級環境敏感地區聯合查詢</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_terrace.png" alt=""></div><div class="adv-title">山坡地保育</div><div class="adv-desc">整地遵守挖填平衡；非屬特定農業區、非活動斷層敏感區</div></div>
+      </div>
+      <div class="note-box warn">
+        本案位於<b>山坡地保育區</b>，兩期面積累計逾 1 公頃，依法觸發山坡地環評門檻；
+        將依規定辦理環境影響評估與水土保持審查程序。
+      </div>
+    </section>
+
+    <!-- 12. 交通規劃與改善 -->
+    <section>
+      <h2>拾壹、交通規劃與改善對策</h2>
+      <ul class="clean">
+        <li>廠區聯外主要經由<b>福德巷</b>銜接區域路網與中山高速公路</li>
+        <li>開案前先取得養護工程處<b>現有巷道認定函</b>，確保通行合法性</li>
+        <li>第二期 672 地號規劃為<b>交通用地（路外停車場）</b>，作為員工停車、大客車接駁與物流裝卸轉運基地</li>
+        <li>透過集中停車與車輛調度規劃，作為<b>交通衝擊評估（TIA）之實質改善對策</b>，降低聯外道路尖峰負荷</li>
+        <li>規劃出入口分流與動線管理，避免與鄰廠通勤車流相互干擾</li>
+      </ul>
+      <div class="note-box ok">
+        將大量車輛停放與調度需求，以獨立交通用地承接，
+        是兼顧廠區營運需求與聯外交通服務水準的合理規劃。
+      </div>
+    </section>
+
+    <!-- 13. 分期開發時程 -->
+    <section>
+      <h2>拾貳、分期開發預定時程</h2>
+      <div class="gantt">
+        <div class="phase-title">第一期（668 地號 · 毗連丁建變更）</div>
+        <div class="bar-row"><div class="lbl">計畫書送審及水保審查</div><div class="bar-track"><div class="bar-fill" style="left:0%; width:28%;"></div></div></div>
+        <div class="bar-row"><div class="lbl">核發毗連證明與變更編定</div><div class="bar-track"><div class="bar-fill" style="left:28%; width:18%;"></div></div></div>
+        <div class="bar-row"><div class="lbl">廠房興建與工廠登記變更</div><div class="bar-track"><div class="bar-fill" style="left:46%; width:30%;"></div></div></div>
+        <div class="phase-title">第二期（672 地號 · 交通用地變更）</div>
+        <div class="bar-row"><div class="lbl">交通用地計畫送審</div><div class="bar-track"><div class="bar-fill p2" style="left:30%; width:22%;"></div></div></div>
+        <div class="bar-row"><div class="lbl">核發核准與變更編定</div><div class="bar-track"><div class="bar-fill p2" style="left:52%; width:18%;"></div></div></div>
+        <div class="bar-row"><div class="lbl">停車轉運設施建置完成</div><div class="bar-track"><div class="bar-fill p2" style="left:70%; width:28%;"></div></div></div>
+      </div>
+      <div class="note-box">
+        採<b>雙軌並行送審</b>：668 興辦計畫（工業主管機關）與 672 交通用地計畫（交通主管機關）
+        同步遞件，爭取時效並兼顧審查品質。
+      </div>
+    </section>
+
+    <!-- 14. 結語與承諾 -->
+    <section data-background-image="images/ending.png" data-background-opacity="0.4" data-background-size="cover">
+      <div class="end-slide">
+        <h1 style="color:var(--accent2);">合法、合規、永續</h1>
+        <p class="tagline">
+          本案以既有合法廠區為基礎，採分期、分用途之合理土地配置，<br>
+          全程依土地、建管、水保、環評及地方審查規範辦理。
+        </p>
+        <div class="adv-grid cols4" style="margin-top:1.2em;">
+          <div class="adv-card"><div class="adv-title">ISO 14001</div><div class="adv-desc">環境管理體系</div></div>
+          <div class="adv-card"><div class="adv-title">ISO 50001</div><div class="adv-desc">能源管理體系</div></div>
+          <div class="adv-card"><div class="adv-title">製程水回收 ≥85%</div><div class="adv-desc">水資源循環利用</div></div>
+          <div class="adv-card"><div class="adv-title">屋頂太陽能</div><div class="adv-desc">設置容量約 3,000kW</div></div>
+        </div>
+        <p class="src">申請人：家登精密工業股份有限公司　|　彰化縣花壇鄉三家段 668、672 地號變更編定案</p>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true, transition: 'slide', transitionSpeed: 'default',
+    backgroundTransition: 'fade', center: true, progress: true,
+    controls: true, slideNumber: 'c/t', plugins: []
+  });
+  // VIZ 滑桿
+  var s = document.getElementById('viz-slider');
+  if (s) s.addEventListener('input', function () {
+    var v = +this.value;
+    document.getElementById('viz-after').style.clipPath = 'inset(0 ' + (100 - v) + '% 0 0)';
+    document.getElementById('viz-divider').style.left = v + '%';
+  });
+</script>
+</body>
+</html>
