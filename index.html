@@ -349,41 +349,19 @@
 
     <!-- 12. 分期開發時程 -->
     <section>
-      <h2>拾壹、分期開發預定時程</h2>
-      <p style="font-size:0.42em; color:#ccc; margin:0 0 0.2em;">以 <b style="color:var(--accent2)">民國 115 年 7 月</b>為起點，須於 <b style="color:#ff8a80">國土計畫法上路（D-day）</b>前完成全部變更編定 ▾</p>
-      <div class="gantt2">
-        <!-- 國土法上路後·變更編定關閉區（D-day 之後） -->
-        <div class="g-buffer" style="left:75%; right:0;"><span class="gb-lbl">國土法上路後 · 變更編定關閉</span></div>
-        <!-- D-day 垂直線（民國120年 = 75%） -->
-        <div class="dday-line" style="left:75%;"></div>
-        <div class="dday-flag" style="left:75%; transform:translateX(-100%); margin-left:-6px;">🚩 國土計畫法上路 D-day｜民國 120 年</div>
-
-        <div class="g-phase">環評階段（山坡地累計逾 1 公頃）</div>
-        <div class="g-task"><div class="g-name">環境影響說明書製作及審查</div><div class="g-track"><div class="g-fill eia" style="left:0%; width:33.33%;"></div></div></div>
-        <div class="g-phase">第一期（668 地號 · 毗連丁建變更）</div>
-        <div class="g-task"><div class="g-name">計畫書送審及水保審查</div><div class="g-track"><div class="g-fill" style="left:0%; width:12.5%;"></div></div></div>
-        <div class="g-task"><div class="g-name">核發毗連證明與變更編定</div><div class="g-track"><div class="g-fill" style="left:33.33%; width:8.33%;"></div></div></div>
-        <div class="g-task"><div class="g-name">廠房興建與工廠登記變更</div><div class="g-track"><div class="g-fill" style="left:41.67%; width:16.67%;"></div></div></div>
-        <div class="g-phase">第二期（672 地號 · 毗連丁建變更）</div>
-        <div class="g-task"><div class="g-name">第二期變更計畫送審</div><div class="g-track"><div class="g-fill p2" style="left:58.33%; width:5.56%;"></div></div></div>
-        <div class="g-task"><div class="g-name">核發二期證明與變更編定</div><div class="g-track"><div class="g-fill p2" style="left:63.89%; width:5.56%;"></div></div></div>
-        <div class="g-task"><div class="g-name">廠房擴建與最終投產</div><div class="g-track"><div class="g-fill p2" style="left:69.44%; width:5.56%;"></div></div></div>
-
-        <!-- 年月時間軸 -->
-        <div class="g-axis">
-          <span class="tk" style="left:0%;"></span><span class="tl-lbl" style="left:0%; transform:none;">115/07</span>
-          <span class="tk" style="left:8.33%;"></span><span class="tl-lbl" style="left:8.33%;">116</span>
-          <span class="tk" style="left:25%;"></span><span class="tl-lbl" style="left:25%;">117</span>
-          <span class="tk" style="left:41.67%;"></span><span class="tl-lbl" style="left:41.67%;">118</span>
-          <span class="tk" style="left:58.33%;"></span><span class="tl-lbl" style="left:58.33%;">119</span>
-          <span class="tk" style="left:75%;"></span><span class="tl-lbl dday" style="left:75%;">120 D-day</span>
-          <span class="tk" style="left:91.67%;"></span><span class="tl-lbl" style="left:91.67%;">121</span>
-        </div>
+      <h2>拾壹、分期開發預定時程（可模擬延誤）</h2>
+      <p style="font-size:0.4em; color:#ccc; margin:0 0 0.2em;">以 <b style="color:var(--accent2)">民國 115 年 7 月</b>為起點，第一期變更編定須俟<b style="color:#b388ff">環評通過</b>後始得進行。拖動下方滑桿模擬時程延誤，各期依相依關係順延 ▾</p>
+      <div id="tl-status" style="font-size:0.4em; font-weight:700; text-align:left; margin:2px 0 4px; min-height:1.2em;"></div>
+      <div class="gantt2" id="tl-chart"></div>
+      <div style="display:flex; align-items:center; gap:12px; margin-top:6px;">
+        <span style="font-size:0.36em; color:var(--success); white-space:nowrap;">準時 1.0×</span>
+        <input id="tl-slider" type="range" min="100" max="300" value="100" style="flex:1; accent-color:var(--accent);">
+        <span style="font-size:0.36em; color:#ff8a80; white-space:nowrap;">嚴重延誤 3.0×</span>
       </div>
-      <div class="note-box warn" style="font-size:0.4em;">
+      <div class="note-box warn" style="font-size:0.38em; margin-top:8px;">
         因山坡地累計逾 1 公頃須先完成<b style="color:#b388ff">環境影響評估</b>；第二期須俟
         <b>第一期完工、工廠登記變更並合併登記</b>後方取得申請資格。全程
-        <b style="color:#ff8a80">必須於國土計畫法上路（D-day）前完成</b>，任何延誤都可能使變更編定無法如期辦理。
+        <b style="color:#ff8a80">必須於國土計畫法上路（D-day · 民國 120 年）前完成</b>——滑桿即顯示延誤如何使工程衝破 D-day。
       </div>
     </section>
 
@@ -459,6 +437,79 @@
     backgroundTransition: 'fade', center: true, progress: true,
     controls: true, slideNumber: 'c/t', plugins: []
   });
+
+  // === 互動時程甘特圖 ===
+  (function(){
+    var DDAY = 54;            // 民國120年1月 = 起點(115/07)後第 54 個月
+    var START_ABS = 115*12 + 6;  // 115/07 的絕對月
+    // dep: 'parallel' 與前置同時起算；'eia' 須環評通過後；'prev' 接續上一項
+    var PHASES = [
+      {name:'環境影響說明書製作及審查', grp:'環評階段（山坡地累計逾 1 公頃）', base:16, dep:'start', cls:'eia'},
+      {name:'計畫書送審及水保審查',     grp:'第一期（668 地號 · 毗連丁建變更）', base:6,  dep:'start', cls:''},
+      {name:'核發毗連證明與變更編定',   grp:'第一期（668 地號 · 毗連丁建變更）', base:6,  dep:'eia',  cls:''},
+      {name:'廠房興建與工廠登記變更',   grp:'第一期（668 地號 · 毗連丁建變更）', base:10, dep:'prev', cls:''},
+      {name:'第二期變更計畫送審',       grp:'第二期（672 地號 · 毗連丁建變更）', base:4,  dep:'prev', cls:'p2'},
+      {name:'核發二期證明與變更編定',   grp:'第二期（672 地號 · 毗連丁建變更）', base:4,  dep:'prev', cls:'p2'},
+      {name:'廠房擴建與最終投產',       grp:'第二期（672 地號 · 毗連丁建變更）', base:8,  dep:'prev', cls:'p2'}
+    ];
+    function ym(m){ var a=START_ABS+Math.round(m); return '民國 '+Math.floor(a/12)+' 年 '+(a%12+1)+' 月'; }
+    function render(f){
+      var st=[], en=[], eiaEnd=0;
+      for(var i=0;i<PHASES.length;i++){
+        var p=PHASES[i], dur=p.base*f, s=0;
+        if(p.dep==='start') s=0;
+        else if(p.dep==='eia') s=eiaEnd;
+        else if(p.dep==='prev') s=en[i-1];
+        st[i]=s; en[i]=s+dur;
+        if(p.cls==='eia') eiaEnd=en[i];
+      }
+      var total=Math.max.apply(null,en);
+      var axisMax=Math.max(total, DDAY+3);
+      axisMax=Math.ceil((axisMax-6)/12)*12+6;       // 對齊到 民國年 邊界
+      var ddayPct=DDAY/axisMax*100;
+      var html='';
+      var lastGrp=null;
+      for(var i=0;i<PHASES.length;i++){
+        var p=PHASES[i];
+        if(p.grp!==lastGrp){ html+='<div class="g-phase">'+p.grp+'</div>'; lastGrp=p.grp; }
+        var l=st[i]/axisMax*100, w=(en[i]-st[i])/axisMax*100;
+        html+='<div class="g-task"><div class="g-name">'+p.name+'</div><div class="g-track"><div class="g-fill '+p.cls+'" style="left:'+l.toFixed(2)+'%;width:'+w.toFixed(2)+'%"></div></div></div>';
+      }
+      // 關閉區 + D-day 線 + 旗標
+      html+='<div class="g-buffer" style="left:'+ddayPct.toFixed(2)+'%; right:0;"><span class="gb-lbl">國土法上路後 · 變更編定關閉</span></div>';
+      html+='<div class="dday-line" style="left:'+ddayPct.toFixed(2)+'%;"></div>';
+      html+='<div class="dday-flag" style="left:'+ddayPct.toFixed(2)+'%; transform:translateX(-100%); margin-left:-6px;">🚩 國土計畫法上路 D-day｜民國 120 年</div>';
+      // 年月軸
+      html+='<div class="g-axis"><span class="tk" style="left:0%;"></span><span class="tl-lbl" style="left:0%; transform:none;">115/07</span>';
+      for(var mo=6; mo<=axisMax-2; mo+=12){
+        var roc=Math.floor((START_ABS+mo)/12);
+        var pct=mo/axisMax*100;
+        var isD=(mo===DDAY);
+        html+='<span class="tk" style="left:'+pct.toFixed(2)+'%;"></span>';
+        html+='<span class="tl-lbl'+(isD?' dday':'')+'" style="left:'+pct.toFixed(2)+'%;">'+roc+(isD?' D-day':'')+'</span>';
+      }
+      html+='</div>';
+      document.getElementById('tl-chart').innerHTML=html;
+      // 狀態列
+      var stt=document.getElementById('tl-status');
+      var over=total-DDAY;
+      if(over>0.5){
+        stt.style.color='#ff5252';
+        stt.innerHTML='⚠ 全部完工：'+ym(total)+'　已超過 D-day 約 <b>'+Math.round(over)+'</b> 個月 → 變更編定恐被永久關閉';
+      } else {
+        stt.style.color='var(--success)';
+        stt.innerHTML='✓ 全部完工：'+ym(total)+'　於 D-day 前完成，餘裕 <b>'+Math.round(-over)+'</b> 個月';
+      }
+    }
+    var sl=document.getElementById('tl-slider');
+    if(sl){
+      var run=function(){ render(+sl.value/100); };
+      sl.addEventListener('input', run);
+      run();
+      // 切到該頁時重繪一次（確保尺寸正確）
+      if(window.Reveal) Reveal.on('slidechanged', function(e){ if(e.currentSlide&&e.currentSlide.querySelector&&e.currentSlide.querySelector('#tl-chart')) run(); });
+    }
+  })();
 </script>
 </body>
 </html>
