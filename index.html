@@ -102,8 +102,9 @@
     .g-track { position: relative; height: 13px; background: rgba(255,255,255,0.05); border-radius: 7px; }
     .g-fill { position: absolute; height: 100%; border-radius: 7px; background: linear-gradient(90deg, var(--accent2), var(--accent)); }
     .g-fill.p2 { background: linear-gradient(90deg, var(--warn), var(--accent)); }
-    .g-buffer { position: absolute; top: 0; bottom: 30px; background: rgba(255,82,82,0.08); border: 1px dashed rgba(255,82,82,0.35); border-radius: 6px; z-index: 1; }
-    .g-buffer .gb-lbl { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); font-size: 0.3em; color: #ff8a80; white-space: nowrap; }
+    .g-fill.eia { background: linear-gradient(90deg, #b388ff, #7c4dff); }
+    .g-buffer { position: absolute; top: 0; bottom: 30px; background: rgba(255,82,82,0.10); border-left: 1px dashed rgba(255,82,82,0.4); z-index: 1; }
+    .g-buffer .gb-lbl { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); font-size: 0.3em; color: #ff8a80; white-space: nowrap; }
     .dday-line { position: absolute; top: 0; bottom: 30px; width: 0; border-left: 2px dashed #ff5252; z-index: 4; }
     .dday-flag { position: absolute; top: -4px; transform: translateX(-50%); font-size: 0.32em; color: #fff; background: #d32f2f; padding: 3px 9px; border-radius: 6px; white-space: nowrap; z-index: 6; font-weight: 700; box-shadow: 0 0 12px rgba(255,82,82,0.6); }
     .g-axis { position: absolute; left: 0; right: 0; bottom: 0; height: 26px; border-top: 1px solid rgba(255,255,255,0.25); z-index: 2; }
@@ -273,23 +274,22 @@
     <section>
       <h2>柒、面積與比例合規性</h2>
       <p style="font-size:0.46em; color:#ccc;">依毗連審查辦法第 5 條：申請變更面積原則不得超過原廠土地總面積 <b style="color:var(--warn)">1.5 倍</b>，且申請以 <b style="color:var(--warn)">2 次</b>為限。</p>
-      <div class="vs-grid">
-        <div class="vs-col right-col">
-          <div class="vs-label right">✕ 一次送審</div>
+      <div class="conclusion-grid">
+        <div class="conclusion-card caution">
+          <div class="cc-title">✕ 一次送審</div>
           <ul>
-            <li>變更 29,217.41 ㎡ ÷ 原廠 7,702.06 ㎡</li>
-            <li>＝ <b style="color:var(--warn)">約 3.79 倍</b>，遠超 1.5 倍上限</li>
-            <li>結果：<b style="color:var(--warn)">直接退件</b></li>
+            <li>變更 29,217.41 ㎡ ÷ 原廠 7,702.06 ㎡ ＝ <b style="color:var(--warn)">約 3.79 倍</b></li>
+            <li>遠超 1.5 倍上限</li>
+            <li><b style="color:var(--warn)">直接退件</b></li>
           </ul>
         </div>
-        <div class="vs-center">→</div>
-        <div class="vs-col left-col">
-          <div class="vs-label left">✓ 分期送審</div>
+        <div class="conclusion-card positive">
+          <div class="cc-title">✓ 分期送審</div>
           <ul>
-            <li>第一期 668：9,792.57 ÷ 669 原廠 7,702.06 ＝ <b style="color:var(--success)">1.27 倍</b> ✓</li>
+            <li>第一期 668：÷ 669 原廠 ＝ <b style="color:var(--success)">1.27 倍</b> ✓</li>
             <li>完工合併後原廠增至 17,494.63 ㎡</li>
-            <li>第二期 672：19,424.84 ÷ 17,494.63 ＝ <b style="color:var(--success)">1.11 倍</b> ✓</li>
-            <li>累計申請 2 次，符合「以二次為限」</li>
+            <li>第二期 672：÷ 17,494.63 ＝ <b style="color:var(--success)">1.11 倍</b> ✓</li>
+            <li>累計 2 次，符合「以二次為限」</li>
           </ul>
         </div>
       </div>
@@ -299,14 +299,14 @@
     <section>
       <h2>捌、土地使用強度與配置</h2>
       <div class="adv-grid cols4">
-        <div class="adv-card"><div class="adv-icon"><img src="images/icon_coverage.png" alt=""></div><div class="adv-title">建蔽率</div><div class="adv-desc">上限 60%<br>規劃 <b>48.5%</b></div></div>
-        <div class="adv-card"><div class="adv-icon"><img src="images/icon_floors.png" alt=""></div><div class="adv-title">容積率</div><div class="adv-desc">上限 180%<br>規劃 <b>120%</b>（地上三層）</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_coverage.png" alt=""></div><div class="adv-title">建蔽率</div><div class="adv-desc">上限 <b>60%</b></div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_floors.png" alt=""></div><div class="adv-title">容積率</div><div class="adv-desc">上限 <b>180%</b></div></div>
         <div class="adv-card"><div class="adv-icon"><img src="images/icon_green.png" alt=""></div><div class="adv-title">綠地</div><div class="adv-desc">變更面積 <b>10%</b><br>變更為國土保安用地</div></div>
-        <div class="adv-card"><div class="adv-icon"><img src="images/icon_belt.png" alt=""></div><div class="adv-title">隔離綠帶</div><div class="adv-desc">變更面積 <b>30%</b><br>帶狀本土喬木綠帶</div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_belt.png" alt=""></div><div class="adv-title">隔離綠帶</div><div class="adv-desc">變更面積 <b>30%</b><br>帶狀遮蔽喬木綠帶</div></div>
       </div>
       <div class="note-box">
         沿基地外圍（特別是東南側鄰農地、東側鄰殯葬用地）留設帶狀隔離綠帶，
-        擋土牆<b>退縮地界</b>、圍籬採透空設計，種植台灣肖楠、樟樹、光蠟樹等遮蔽喬木，
+        擋土牆<b>退縮地界</b>、圍籬採透空設計，種植<b>遮蔽喬木</b>，
         兼顧景觀隔離與鄰地農業生產環境維護。
       </div>
     </section>
@@ -352,20 +352,22 @@
       <h2>拾壹、分期開發預定時程</h2>
       <p style="font-size:0.42em; color:#ccc; margin:0 0 0.2em;">以 <b style="color:var(--accent2)">民國 115 年 7 月</b>為起點，須於 <b style="color:#ff8a80">國土計畫法上路（D-day）</b>前完成全部變更編定 ▾</p>
       <div class="gantt2">
-        <!-- 安全餘裕區（末項完工至 D-day） -->
-        <div class="g-buffer" style="left:41.67%; right:25%;"><span class="gb-lbl">安全餘裕期 · 不得延誤</span></div>
+        <!-- 國土法上路後·變更編定關閉區（D-day 之後） -->
+        <div class="g-buffer" style="left:75%; right:0;"><span class="gb-lbl">國土法上路後 · 變更編定關閉</span></div>
         <!-- D-day 垂直線（民國120年 = 75%） -->
         <div class="dday-line" style="left:75%;"></div>
         <div class="dday-flag" style="left:75%;">🚩 國土計畫法上路 D-day｜民國 120 年</div>
 
+        <div class="g-phase">環評階段（山坡地累計逾 1 公頃）</div>
+        <div class="g-task"><div class="g-name">環境影響說明書製作及審查</div><div class="g-track"><div class="g-fill eia" style="left:0%; width:33.33%;"></div></div></div>
         <div class="g-phase">第一期（668 地號 · 毗連丁建變更）</div>
-        <div class="g-task"><div class="g-name">計畫書送審及水保審查</div><div class="g-track"><div class="g-fill" style="left:0%; width:8.33%;"></div></div></div>
-        <div class="g-task"><div class="g-name">核發毗連證明與變更編定</div><div class="g-track"><div class="g-fill" style="left:8.33%; width:5.56%;"></div></div></div>
-        <div class="g-task"><div class="g-name">廠房興建與工廠登記變更</div><div class="g-track"><div class="g-fill" style="left:13.89%; width:11.11%;"></div></div></div>
+        <div class="g-task"><div class="g-name">計畫書送審及水保審查</div><div class="g-track"><div class="g-fill" style="left:0%; width:12.5%;"></div></div></div>
+        <div class="g-task"><div class="g-name">核發毗連證明與變更編定</div><div class="g-track"><div class="g-fill" style="left:33.33%; width:8.33%;"></div></div></div>
+        <div class="g-task"><div class="g-name">廠房興建與工廠登記變更</div><div class="g-track"><div class="g-fill" style="left:41.67%; width:16.67%;"></div></div></div>
         <div class="g-phase">第二期（672 地號 · 毗連丁建變更）</div>
-        <div class="g-task"><div class="g-name">第二期變更計畫送審</div><div class="g-track"><div class="g-fill p2" style="left:25%; width:5.56%;"></div></div></div>
-        <div class="g-task"><div class="g-name">核發二期證明與變更編定</div><div class="g-track"><div class="g-fill p2" style="left:30.56%; width:5.56%;"></div></div></div>
-        <div class="g-task"><div class="g-name">廠房擴建與最終投產</div><div class="g-track"><div class="g-fill p2" style="left:36.11%; width:5.56%;"></div></div></div>
+        <div class="g-task"><div class="g-name">第二期變更計畫送審</div><div class="g-track"><div class="g-fill p2" style="left:58.33%; width:5.56%;"></div></div></div>
+        <div class="g-task"><div class="g-name">核發二期證明與變更編定</div><div class="g-track"><div class="g-fill p2" style="left:63.89%; width:5.56%;"></div></div></div>
+        <div class="g-task"><div class="g-name">廠房擴建與最終投產</div><div class="g-track"><div class="g-fill p2" style="left:69.44%; width:5.56%;"></div></div></div>
 
         <!-- 年月時間軸 -->
         <div class="g-axis">
@@ -378,9 +380,10 @@
           <span class="tk" style="left:91.67%;"></span><span class="tl-lbl" style="left:91.67%;">121</span>
         </div>
       </div>
-      <div class="note-box warn">
-        第二期須俟<b>第一期完工、工廠登記變更並合併登記</b>後方取得申請資格；全程
-        <b style="color:#ff8a80">必須於國土計畫法上路前完成</b>，任何延誤都將壓縮安全餘裕。
+      <div class="note-box warn" style="font-size:0.4em;">
+        因山坡地累計逾 1 公頃須先完成<b style="color:#b388ff">環境影響評估</b>；第二期須俟
+        <b>第一期完工、工廠登記變更並合併登記</b>後方取得申請資格。全程
+        <b style="color:#ff8a80">必須於國土計畫法上路（D-day）前完成</b>，任何延誤都可能使變更編定無法如期辦理。
       </div>
     </section>
 
