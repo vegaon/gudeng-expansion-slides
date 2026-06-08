@@ -439,7 +439,6 @@
     <section>
       <h2 style="color:var(--success);">拾肆、建議方案預定時程 ── 兩案並行（可模擬調整）</h2>
       <p style="font-size:0.35em; color:#ccc; margin:0 0 0.15em;"><b style="color:var(--accent2)">第一案 668</b> 依法<b>循序辦理</b>（原廠工登→環說→計畫書送審水保→核發毗連→廠房興建），與第 12 頁第一期一致；<b style="color:var(--success)">第二案 672</b> 改<b>交通用地</b>、審查路徑單純，可<b style="color:var(--success)">與第一案並行加速</b>。拖動<b>調整桿</b>即時模擬 ▾</p>
-      <div id="tl2-status" style="font-size:0.4em; font-weight:700; text-align:left; margin:2px 0 4px; min-height:1.2em;"></div>
       <div class="gantt2" id="tl2-chart"></div>
       <div class="note-box warn" style="font-size:0.34em; margin-top:5px;">
         務實循序估計下，第一案 668 丁建之變更編定<b>恐逼近／超過國土法 D-day（民國 120 年）</b>；故<b>第二案 672 改交通用地、與第一案並行</b>為爭取整體時效之關鍵——不涉製程污染、審查快，並同步化解 669＋668 投產之<b>交通衝擊（TIA）</b>卡關。
@@ -601,9 +600,6 @@
         ax+='<span class="tk" style="left:'+pct.toFixed(2)+'%;"></span><span class="tl-lbl'+(isD?' dday':'')+'" style="left:'+pct.toFixed(2)+'%;">'+roc+(isD?' D-day':'')+'</span>';
       }
       document.getElementById('tl2-axis').innerHTML=ax;
-      var stt=document.getElementById('tl2-status'), over=total-DDAY;
-      if(over>0.5){ stt.style.color='#ff5252'; stt.innerHTML='⚠ 全部完工：'+ym(total)+'（自起算 '+Math.round(total)+' 個月）　超過 D-day 約 <b>'+Math.round(over)+'</b> 個月'; }
-      else { stt.style.color='var(--success)'; stt.innerHTML='✓ 全部完工：'+ym(total)+'（自起算 '+Math.round(total)+' 個月）　於 D-day 前完成，餘裕 <b>'+Math.round(-over)+'</b> 個月'; }
     }
     chart.addEventListener('input', function(e){ var t=e.target; if(t.classList&&t.classList.contains('g-dur')){ dur[+t.getAttribute('data-idx')]=+t.value; update(); } });
     update();
