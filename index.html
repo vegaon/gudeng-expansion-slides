@@ -156,6 +156,7 @@
         <p class="subtitle">彰化縣花壇鄉三家段 668、672 地號<br>分期變更編定為丁種建築用地</p>
         <p class="author">申請人：家登精密工業股份有限公司（股票代號 3680）<br>簡報日期：中華民國 115 年</p>
       </div>
+      <div style="position:absolute; bottom:14px; right:20px; font-size:0.32em; color:#9aa0a6; letter-spacing:0.06em;">由　鴻昌環保科技有限公司　規劃</div>
     </section>
 
     <!-- 2. 計畫緣由與目的 -->
@@ -374,7 +375,7 @@
       <div class="gantt2" id="tl-chart"></div>
       <div class="note-box warn" style="font-size:0.36em; margin-top:6px;">
         原廠須先取得<b>工廠登記證</b>方具毗連擴廠資格；因山坡地逾 1 公頃，<b style="color:#b388ff">第一、二期各須先完成環評</b>；第二期須俟
-        <b>第一期完工並合併登記</b>後始得申請。全程<b style="color:#ff8a80">必須於國土計畫法上路（D-day · 民國 120 年）前完成</b>——調整各階段月數即顯示整體是否衝破 D-day。
+        <b>第一期完成建設並取得工廠登記證</b>後始得申請。全程<b style="color:#ff8a80">必須於國土計畫法上路（D-day · 民國 120 年）前完成</b>——調整各階段月數即顯示整體是否衝破 D-day。
       </div>
     </section>
 
@@ -442,6 +443,18 @@
       </div>
     </section>
 
+    <!-- 16. 結語 -->
+    <section data-background-image="images/ending.png" data-background-opacity="0.45" data-background-size="cover">
+      <div class="end-slide">
+        <h1 style="font-size:2.4em;">感謝聆聽</h1>
+        <p class="tagline">敬請　指教</p>
+        <p style="margin-top:1.8em; font-size:0.5em; color:#ddd; line-height:2;">
+          <b style="color:var(--accent2); font-size:1.2em;">鴻昌環保科技有限公司</b><br>
+          王慶彰
+        </p>
+      </div>
+    </section>
+
   </div>
 </div>
 
@@ -458,13 +471,13 @@
     var DDAY = 54;               // 民國120年1月 = 起點(115/07)後第 54 個月
     var START_ABS = 115*12 + 6;  // 115/07 的絕對月
     var PHASES = [
-      {name:'原廠建廠及取得工廠登記證',     grp:'原廠籌建（669 地號 · 既有丁建）',   base:24, min:18, max:30, dep:'start', cls:'orig'},
-      {name:'環境影響說明書製作及審查',     grp:'第一期（668 地號 · 毗連丁建變更）', base:16, min:6,  max:36, dep:'prev',  cls:'eia'},
-      {name:'計畫書送審及水保審查',         grp:'第一期（668 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:''},
+      {name:'原廠建廠及取得工廠登記證',     grp:'原廠籌建（669 地號 · 既有丁建）',   base:22, min:18, max:30, dep:'start', cls:'orig'},
+      {name:'環境影響說明書製作及審查',     grp:'第一期（668 地號 · 毗連丁建變更）', base:12, min:6,  max:36, dep:'prev',  cls:'eia'},
+      {name:'計畫書送審及水保審查',         grp:'第一期（668 地號 · 毗連丁建變更）', base:10, min:3,  max:24, dep:'prev',  cls:''},
       {name:'核發毗連證明與變更編定',       grp:'第一期（668 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:''},
       {name:'廠房興建與工廠登記變更',       grp:'第一期（668 地號 · 毗連丁建變更）', base:18, min:12, max:30, dep:'prev',  cls:''},
-      {name:'環境影響說明書製作及審查',     grp:'第二期（672 地號 · 毗連丁建變更）', base:18, min:6,  max:36, dep:'prev',  cls:'eia'},
-      {name:'第二期變更計畫送審',           grp:'第二期（672 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:'p2'},
+      {name:'環境影響說明書製作及審查',     grp:'第二期（672 地號 · 毗連丁建變更）', base:12, min:6,  max:36, dep:'prev',  cls:'eia'},
+      {name:'第二期變更計畫送審',           grp:'第二期（672 地號 · 毗連丁建變更）', base:10, min:3,  max:24, dep:'prev',  cls:'p2'},
       {name:'核發二期證明與變更編定',       grp:'第二期（672 地號 · 毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',  cls:'p2'},
       {name:'廠房擴建與最終投產',           grp:'第二期（672 地號 · 毗連丁建變更）', base:18, min:12, max:30, dep:'prev',  cls:'p2'}
     ];
@@ -526,13 +539,13 @@
     var START_ABS = 115*12 + 6;  // 115/07 的絕對月
     // dep: 'start'=與起點同時 / 'prev'=接續上一階段 / {mirror:idx}=與第idx階段同起訖（時間相同）
     var PHASES = [
-      {name:'原廠建廠及取得工廠登記證',     grp:'原廠籌建（669 地號 · 既有丁建）',          base:24, min:18, max:30, dep:'start',     cls:'orig'},
-      {name:'環境影響說明書製作及審查',     grp:'第一案 668（毗連丁建變更）', base:16, min:6,  max:36, dep:'prev',      cls:'eia'},
-      {name:'計畫書送審及水保審查',         grp:'第一案 668（毗連丁建變更）', base:12, min:6,  max:24, dep:'prev',      cls:''},
+      {name:'原廠建廠及取得工廠登記證',     grp:'原廠籌建（669 地號 · 既有丁建）',          base:22, min:18, max:30, dep:'start',     cls:'orig'},
+      {name:'環境影響說明書製作及審查',     grp:'第一案 668（毗連丁建變更）', base:12, min:6,  max:36, dep:'prev',      cls:'eia'},
+      {name:'計畫書送審及水保審查',         grp:'第一案 668（毗連丁建變更）', base:10, min:6,  max:24, dep:'prev',      cls:''},
       {name:'核發毗連證明與變更編定',       grp:'第一案 668（毗連丁建變更）', base:6,  min:3,  max:18, dep:'prev',      cls:''},
       {name:'廠房興建與工廠登記變更',       grp:'第一案 668（毗連丁建變更）', base:18, min:12, max:30, dep:'prev',      cls:''},
-      {name:'交通用地變更審查（出流管制·水保，路徑單純）',       grp:'第二案 672（改交通用地 · 與第一案並行）', base:10, min:6,  max:18, dep:'start',     cls:'p2'},
-      {name:'路外停車場·接駁轉運站興建（緊接交通用地審查後）', grp:'第二案 672（改交通用地 · 與第一案並行）', base:18, min:12, max:30, dep:'prev', cls:'p2'}
+      {name:'交通用地變更審查（出流管制·水保，路徑單純）',       grp:'第二案 672（改交通用地 · 與第一案並行）', base:16, min:6,  max:24, dep:'start',     cls:'p2'},
+      {name:'路外停車場·接駁轉運站興建（緊接交通用地審查後）', grp:'第二案 672（改交通用地 · 與第一案並行）', base:6, min:3, max:18, dep:'prev', cls:'p2'}
     ];
     var dur = PHASES.map(function(p){ return p.base; });
     var chart = document.getElementById('tl2-chart');
