@@ -106,7 +106,7 @@
     .g-fill.p2 { background: linear-gradient(90deg, var(--warn), var(--accent)); }
     .g-fill.eia { background: linear-gradient(90deg, #b388ff, #7c4dff); }
     .g-fill.orig { background: linear-gradient(90deg, #90a4ae, #546e7a); }
-    .g-dur { width: 130px; height: 5px; flex: none; margin: 0; accent-color: #9aa0a6; opacity: 0.7; cursor: pointer; }
+    input[type=range].g-dur { width: 130px; height: 5px; flex: none; margin: 0; accent-color: #555; opacity: 0.8; cursor: pointer; }
     .g-buffer { position: absolute; top: 0; bottom: 30px; background: rgba(255,82,82,0.10); border-left: 1px dashed rgba(255,82,82,0.4); z-index: 1; }
     .g-buffer .gb-lbl { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); font-size: 0.3em; color: #ff8a80; white-space: nowrap; }
     .dday-line { position: absolute; top: 0; bottom: 30px; width: 0; border-left: 2px dashed #ff5252; z-index: 4; }
@@ -182,9 +182,6 @@
         <div class="adv-card"><div class="adv-icon"><img src="images/icon_foup.png" alt=""></div><div class="adv-title">FOUP</div><div class="adv-desc">前開式晶圓傳送盒</div></div>
         <div class="adv-card"><div class="adv-icon"><img src="images/icon_molding.png" alt=""></div><div class="adv-title">精密射出</div><div class="adv-desc">高精密全電式成型</div></div>
         <div class="adv-card"><div class="adv-icon"><img src="images/icon_cleanroom.png" alt=""></div><div class="adv-title">無塵室製程</div><div class="adv-desc">Class 10/100 潔淨裝配</div></div>
-      </div>
-      <div class="note-box" style="font-size:0.4em;">
-        統一編號 16406379｜負責人 邱銘乾｜登記地址 新北市土城區中央路四段 2 號 9 樓之 5
       </div>
     </section>
 
@@ -308,8 +305,8 @@
     <section>
       <h2>捌、土地使用強度與配置</h2>
       <div class="adv-grid cols4">
-        <div class="adv-card"><div class="adv-icon"><img src="images/icon_coverage.png" alt=""></div><div class="adv-title">建蔽率</div><div class="adv-desc">上限 <b>60%</b></div></div>
-        <div class="adv-card"><div class="adv-icon"><img src="images/icon_floors.png" alt=""></div><div class="adv-title">容積率</div><div class="adv-desc">上限 <b>180%</b></div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_coverage.png" alt=""></div><div class="adv-title">建蔽率</div><div class="adv-desc">上限 <b>70%</b></div></div>
+        <div class="adv-card"><div class="adv-icon"><img src="images/icon_floors.png" alt=""></div><div class="adv-title">容積率</div><div class="adv-desc">上限 <b>300%</b></div></div>
         <div class="adv-card"><div class="adv-icon"><img src="images/icon_green.png" alt=""></div><div class="adv-title">綠地</div><div class="adv-desc">變更面積 <b>10%</b><br>變更為國土保安用地</div></div>
         <div class="adv-card"><div class="adv-icon"><img src="images/icon_belt.png" alt=""></div><div class="adv-title">隔離綠帶</div><div class="adv-desc">變更面積 <b>30%</b><br>帶狀遮蔽喬木綠帶</div></div>
       </div>
@@ -335,9 +332,17 @@
           放流水標準後<b>以專管外排</b>，<b>嚴禁排入灌溉渠道</b>。
         </div>
       </div>
-      <div class="note-box warn">
+      <div class="note-box warn" style="font-size:0.4em; margin:0.4em 0;">
         彰化為農業大縣，依地方審查實務嚴格要求廢污水與農業灌溉排水系統<b>實質分流</b>；
         本案以灌排分流設計確保不影響鄰近農業生產環境。
+      </div>
+      <div class="note-box ok" style="font-size:0.38em; margin:0.4em 0;">
+        <b style="color:var(--success);">我方建議（加值方案）</b>
+        <ul class="clean" style="font-size:1em; line-height:1.5; margin:4px 0 0;">
+          <li>設置<b>雨水及製程回收水再利用系統</b>，降低自來水用量與放流量，呼應彰化缺水及水資源永續</li>
+          <li><b>滯洪沉砂池複合化</b>：兼具生態棲地、景觀與雨水調節功能，提升出流管制與生態補償效益</li>
+          <li><b>雨水／污水下水道完全分流並標示識別</b>，杜絕誤接，強化「實質分流」之審查說服力</li>
+        </ul>
       </div>
     </section>
 
@@ -352,7 +357,7 @@
       </div>
       <div class="note-box warn">
         本案位於<b>山坡地保育區</b>，兩期面積累計逾 1 公頃，依法觸發山坡地環評門檻；
-        將依規定辦理環境影響評估與水土保持審查程序。
+        將依規定辦理<b style="color:var(--warn); font-size:1.18em; background:rgba(255,183,77,0.18); padding:1px 6px; border-radius:4px;">環境影響評估</b>與水土保持審查程序。
       </div>
     </section>
 
@@ -424,11 +429,11 @@
     <!-- 15. 建議方案預定時程（兩案並行 · 可模擬調整） -->
     <section>
       <h2 style="color:var(--success);">拾肆、建議方案預定時程 ── 兩案並行（可模擬調整）</h2>
-      <p style="font-size:0.38em; color:#ccc; margin:0 0 0.2em;">採前頁破局方案後，<b style="color:var(--accent2)">第一案 668</b>（毗連丁建，面積 &lt;1 公頃<b>免一階環評</b>）於 669 原廠籌建之<b>同時</b>同步申辦；<b style="color:var(--success)">第二案 672</b>（改交通用地，審查路徑單純）<b>與第一案並行</b>，其興建期<b style="color:var(--success)">與第一案廠房興建同時段</b>推進。拖動<b>調整桿</b>即時模擬 ▾</p>
+      <p style="font-size:0.35em; color:#ccc; margin:0 0 0.15em;"><b style="color:var(--accent2)">第一案 668</b> 審查流程<b>與第 12 頁完全相同</b>，惟與 669 原廠<b>同時申辦並行</b>；<b>差別僅在第二案</b>：<b style="color:var(--success)">672 改交通用地</b>、與第一案並行、興建期<b style="color:var(--success)">＝廠房興建同時段</b>，即足以拉回 D-day 前。拖動<b>調整桿</b>模擬 ▾</p>
       <div id="tl2-status" style="font-size:0.4em; font-weight:700; text-align:left; margin:2px 0 4px; min-height:1.2em;"></div>
       <div class="gantt2" id="tl2-chart"></div>
-      <div class="note-box ok" style="font-size:0.36em; margin-top:6px;">
-        兩案並行下，整體可於 <b>D-day（民國 120 年）前</b>完成使用地變更登記，較「純丁建分期順接」大幅縮短時程；第二案交通用地不涉製程污染、審查快，且同步解決 669＋668 投產後的交通衝擊（TIA）卡關。
+      <div class="note-box ok" style="font-size:0.34em; margin-top:5px;">
+        與第 12 頁相比，<b>第一案流程完全相同</b>，差別僅在第二案由「丁建順接」改為「交通用地並行」，即可於 <b>D-day（民國 120 年）前</b>完成；交通用地不涉製程污染、審查快，並同步化解 669＋668 投產之交通衝擊（TIA）卡關。
       </div>
     </section>
 
@@ -516,11 +521,13 @@
     var START_ABS = 115*12 + 6;  // 115/07 的絕對月
     // dep: 'start'=與起點同時 / 'prev'=接續上一階段 / {mirror:idx}=與第idx階段同起訖（時間相同）
     var PHASES = [
-      {name:'原廠建廠及取得工廠登記證',                       grp:'原廠 669（既有丁建 · 前置）',              base:24, min:18, max:30, dep:'start',       cls:'orig'},
-      {name:'計畫書送審·水保·核發毗連證明與變更編定（免一階環評）', grp:'第一案 668（毗連丁建變更 · 與原廠同時申辦）', base:12, min:6,  max:24, dep:'start',       cls:''},
-      {name:'廠房興建與工廠登記變更',                         grp:'第一案 668（毗連丁建變更 · 與原廠同時申辦）', base:18, min:12, max:30, dep:'prev',        cls:''},
-      {name:'交通用地變更審查（出流管制·水保，路徑單純）',       grp:'第二案 672（改交通用地 · 與第一案並行）',     base:10, min:6,  max:18, dep:'start',       cls:'p2'},
-      {name:'路外停車場·接駁轉運站興建（＝第一案廠房興建同時段）', grp:'第二案 672（改交通用地 · 與第一案並行）',     base:18, min:12, max:30, dep:{mirror:2},   cls:'p2'}
+      {name:'原廠建廠及取得工廠登記證',     grp:'原廠籌建（669 地號 · 既有丁建）',          base:24, min:18, max:30, dep:'start',     cls:'orig'},
+      {name:'環境影響說明書製作及審查',     grp:'第一案 668（毗連丁建變更 · 與原廠同時申辦）', base:16, min:6,  max:36, dep:'start',     cls:'eia'},
+      {name:'計畫書送審及水保審查',         grp:'第一案 668（毗連丁建變更 · 與原廠同時申辦）', base:6,  min:3,  max:18, dep:'prev',      cls:''},
+      {name:'核發毗連證明與變更編定',       grp:'第一案 668（毗連丁建變更 · 與原廠同時申辦）', base:6,  min:3,  max:18, dep:'prev',      cls:''},
+      {name:'廠房興建與工廠登記變更',       grp:'第一案 668（毗連丁建變更 · 與原廠同時申辦）', base:18, min:12, max:30, dep:'prev',      cls:''},
+      {name:'交通用地變更審查（出流管制·水保，路徑單純）',       grp:'第二案 672（改交通用地 · 與第一案並行）', base:10, min:6,  max:18, dep:'start',     cls:'p2'},
+      {name:'路外停車場·接駁轉運站興建（＝第一案廠房興建同時段）', grp:'第二案 672（改交通用地 · 與第一案並行）', base:18, min:12, max:30, dep:{mirror:4}, cls:'p2'}
     ];
     var dur = PHASES.map(function(p){ return p.base; });
     var chart = document.getElementById('tl2-chart');
