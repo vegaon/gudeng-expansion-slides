@@ -107,6 +107,9 @@
     .g-fill.eia { background: linear-gradient(90deg, #b388ff, #7c4dff); }
     .g-fill.orig { background: linear-gradient(90deg, #90a4ae, #546e7a); }
     input[type=range].g-dur { width: 130px; height: 5px; flex: none; margin: 0; accent-color: #555; opacity: 0.8; cursor: pointer; }
+    /* 列印／PDF：隱藏互動調整桿，僅保留時程條與月數 */
+    @media print { .g-dur { display: none !important; } }
+    html.print-pdf .g-dur, body.print-pdf .g-dur, .reveal.print-pdf .g-dur { display: none !important; }
     .g-buffer { position: absolute; top: 0; bottom: 30px; background: rgba(255,82,82,0.10); border-left: 1px dashed rgba(255,82,82,0.4); z-index: 1; }
     .g-buffer .gb-lbl { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); font-size: 0.3em; color: #ff8a80; white-space: nowrap; }
     .dday-line { position: absolute; top: 0; bottom: 30px; width: 0; border-left: 2px dashed #ff5252; z-index: 4; }
@@ -386,7 +389,7 @@
       <div class="adv-grid cols4">
         <div class="adv-card" style="border-top-color:var(--warn);"><div class="adv-icon"><img src="images/icon_clock.png" alt=""></div><div class="adv-title" style="color:var(--warn)">時程瀑布</div><div class="adv-desc">原廠工登→一期變更→一期建廠→二期環評聯審→二期建廠，累計恐達 <b>8～11 年</b></div></div>
         <div class="adv-card" style="border-top-color:var(--warn);"><div class="adv-icon"><img src="images/icon_gate.png" alt=""></div><div class="adv-title" style="color:var(--warn)">國土計畫法大限</div><div class="adv-desc">區域計畫法廢止後，<b>非都市土地變更編定路徑將永久關閉</b></div></div>
-        <div class="adv-card" style="border-top-color:var(--warn);"><div class="adv-icon"><img src="images/icon_road.png" alt=""></div><div class="adv-title" style="color:var(--warn)">交通衝擊硬傷</div><div class="adv-desc">聯外僅<b>福德巷</b>且與鄰廠共用，TIA 恐降至 <b>LOS E/F</b>，受地形產權限制難以拓寬</div></div>
+        <div class="adv-card" style="border-top-color:var(--warn);"><div class="adv-icon"><img src="images/icon_road.png" alt=""></div><div class="adv-title" style="color:var(--warn)">交通衝擊硬傷</div><div class="adv-desc">聯外僅<b>福德巷</b>且與鄰廠共用，TIA（交通影響評估）恐降至 <b>LOS E/F（服務水準 E/F 級）</b>，受地形產權限制難以拓寬</div></div>
         <div class="adv-card" style="border-top-color:var(--warn);"><div class="adv-icon"><img src="images/icon_check.png" alt=""></div><div class="adv-title" style="color:var(--warn)">環評門檻</div><div class="adv-desc">二期面積逾 1 公頃，<b>必走環評</b>，行政審查再添 30～36 個月</div></div>
       </div>
       <div class="note-box warn">
@@ -403,9 +406,9 @@
             <img src="images/icon_building.png" style="width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(79,195,247,0.6));">
             <div style="font-size:0.52em; font-weight:700; color:var(--accent2);">第一案 ── 668 丁建變更</div>
           </div>
-          <ul style="font-size:0.35em; line-height:1.55; margin:0; padding-left:1.1em; color:#cfcfcf;">
-            <li>於 669 原廠申辦建照、建廠之<b>同時</b>，同步對 668 提出毗連丁建變更，爭取時效</li>
-            <li>申請面積 9,792.57 ㎡ <b>控制在 1 公頃以下</b>，依法有機會免除第一階段環評，大幅縮短時程</li>
+          <ul style="font-size:0.35em; line-height:1.3; margin:0; padding-left:1.1em; color:#cfcfcf;">
+            <li>於 669 原廠申辦建造、建廠之<b>同時</b>，即同步展開 668 毗連丁建變更之<b>環境影響說明書撰寫</b>；俟<b>取得工廠登記證</b>後，立即送交環說<b>審查</b>，以爭取時效</li>
+            <li>668 單案 9,792.57 ㎡ 雖<b>未達 1 公頃</b>，惟依<b>現行彰化縣環評規定</b>，開發<b>累積面積達 1 公頃即須辦理環評</b>，故環評<b>無法免除</b>、須一併納入時程</li>
             <li>面積佔原廠 669 之 <b>1.27 倍</b>，符合《毗連辦法》1.5 倍上限</li>
             <li>搶在國土計畫功能分區圖公告（D-day）<b>前</b>完成使用地變更登記</li>
             <li>成果：669＋668 合併後<b>丁種建築用地達 17,494.63 ㎡</b></li>
@@ -416,7 +419,7 @@
             <img src="images/icon_parking.png" style="width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(129,199,132,0.6));">
             <div style="font-size:0.52em; font-weight:700; color:var(--success);">第二案 ── 672 改交通用地</div>
           </div>
-          <ul style="font-size:0.35em; line-height:1.55; margin:0; padding-left:1.1em; color:#cfcfcf;">
+          <ul style="font-size:0.35em; line-height:1.3; margin:0; padding-left:1.1em; color:#cfcfcf;">
             <li>672（1.94 公頃）若仍變更丁建，受第一案建廠取得新工登之前置鎖定，國土法公告前<b>絕對來不及</b></li>
             <li>改申請<b>交通用地（路外停車場）</b>：規劃大型員工停車場、大客車接駁轉運站與物流裝卸車位</li>
             <li>與生產區在土地權屬上<b>功能區隔</b>，承接擴廠後龐大車流，使整體配置合理化</li>
@@ -426,7 +429,7 @@
       </div>
       <div class="adv-grid cols4" style="margin-top:9px; gap:10px;">
         <div class="adv-card" style="border-top-color:var(--success); text-align:left; padding:9px 11px;"><div class="adv-title" style="font-size:0.42em;">避 1.5 倍限制</div><div class="adv-desc" style="font-size:0.31em; line-height:1.5; text-align:left;">交通用地依《非都市土地使用管制規則》相關條款辦理，<b>不受《毗連辦法》第 5 條原廠 1.5 倍</b>面積限制，可直接合法過關。</div></div>
-        <div class="adv-card" style="border-top-color:var(--success); text-align:left; padding:9px 11px;"><div class="adv-title" style="font-size:0.42em;">解交通卡關（最關鍵）</div><div class="adv-desc" style="font-size:0.31em; line-height:1.5; text-align:left;">669＋668 投產引入大量車流，福德巷既有路寬無法負荷、<b>TIA 必被退</b>；672 作專屬停車接駁基地，是最實質的交通改善對策，足以說服交通局與環評委員放行第一案。</div></div>
+        <div class="adv-card" style="border-top-color:var(--success); text-align:left; padding:9px 11px;"><div class="adv-title" style="font-size:0.42em;">解交通卡關（最關鍵）</div><div class="adv-desc" style="font-size:0.31em; line-height:1.5; text-align:left;">669＋668 投產引入大量車流，福德巷既有路寬無法負荷、<b>TIA（交通影響評估）必被退</b>；672 作專屬停車接駁基地，是最實質的交通改善對策，足以說服交通局與環評委員放行第一案。</div></div>
         <div class="adv-card" style="border-top-color:var(--success); text-align:left; padding:9px 11px;"><div class="adv-title" style="font-size:0.42em;">審查快、門檻低</div><div class="adv-desc" style="font-size:0.31em; line-height:1.5; text-align:left;">交通用地無製程廢水與空氣污染負荷，其環評、水保、出流管制之難度與速度<b>遠快於丁建</b>，可與第一案並行送審。</div></div>
         <div class="adv-card" style="border-top-color:var(--success); text-align:left; padding:9px 11px;"><div class="adv-title" style="font-size:0.42em;">實績背書</div><div class="adv-desc" style="font-size:0.31em; line-height:1.5; text-align:left;">本團隊具豐富<b>路外停車場／交通用地變更通過實績</b>（鏹盟、指南、德旺、圭棗等），熟稔交通影響評估與出入口規劃。</div></div>
       </div>
