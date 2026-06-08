@@ -156,12 +156,17 @@
         <b>產線異地備援</b>並建置<b>先進封裝載具（PLP Carrier）新事業生產基地</b>，
         需以既有花壇廠區為基礎進行毗連擴建。
       </div>
-      <ul class="clean">
+      <ul class="clean" style="line-height:1.7;">
         <li>以既有合法廠區（669 地號丁種建築用地）為核心，毗連擴展</li>
         <li>引進<b>低污染</b>之高精密射出成型與無塵室潔淨裝配製程</li>
         <li>共用既有公用設施，提升能源使用效率、減少重複投資</li>
         <li>分期規劃土地變更，兼顧產能需求與土地使用合規</li>
       </ul>
+      <div class="src" style="text-align:left;">
+        資料來源（公開資訊）：家登精密 114 年法人說明會（2nm 先進製程帶動 EUV Pod／FOUP 出貨達峰、產能滿載）；
+        家登精密官方新聞稿〈2024 營運寫新高〉及 MoneyDJ／鉅亨網等公開報導（海內外「異地備援」建廠布局）；
+        先進封裝載具（PLP／CoWoS 全系列）新事業客戶驗證進行中。
+      </div>
     </section>
 
     <!-- 3. 申請人基本資料 -->
@@ -416,6 +421,17 @@
       </div>
     </section>
 
+    <!-- 15. 建議方案預定時程（兩案並行 · 可模擬調整） -->
+    <section>
+      <h2 style="color:var(--success);">拾肆、建議方案預定時程 ── 兩案並行（可模擬調整）</h2>
+      <p style="font-size:0.38em; color:#ccc; margin:0 0 0.2em;">採前頁破局方案後，<b style="color:var(--accent2)">第一案 668</b>（毗連丁建，面積 &lt;1 公頃<b>免一階環評</b>）於 669 原廠籌建之<b>同時</b>同步申辦；<b style="color:var(--success)">第二案 672</b>（改交通用地，審查路徑單純）<b>與第一案並行</b>，其興建期<b style="color:var(--success)">與第一案廠房興建同時段</b>推進。拖動<b>調整桿</b>即時模擬 ▾</p>
+      <div id="tl2-status" style="font-size:0.4em; font-weight:700; text-align:left; margin:2px 0 4px; min-height:1.2em;"></div>
+      <div class="gantt2" id="tl2-chart"></div>
+      <div class="note-box ok" style="font-size:0.36em; margin-top:6px;">
+        兩案並行下，整體可於 <b>D-day（民國 120 年）前</b>完成使用地變更登記，較「純丁建分期順接」大幅縮短時程；第二案交通用地不涉製程污染、審查快，且同步解決 669＋668 投產後的交通衝擊（TIA）卡關。
+      </div>
+    </section>
+
   </div>
 </div>
 
@@ -492,6 +508,78 @@
     chart.addEventListener('input', function(e){ var t=e.target; if(t.classList&&t.classList.contains('g-dur')){ dur[+t.getAttribute('data-idx')]=+t.value; update(); } });
     update();
     if(window.Reveal) Reveal.on('slidechanged', function(e){ if(e.currentSlide&&e.currentSlide.querySelector&&e.currentSlide.querySelector('#tl-chart')) update(); });
+  })();
+
+  // === 建議方案甘特圖（兩案並行；第二案興建＝第一案廠房興建同時段） ===
+  (function(){
+    var DDAY = 54;               // 民國120年1月 = 起點(115/07)後第 54 個月
+    var START_ABS = 115*12 + 6;  // 115/07 的絕對月
+    // dep: 'start'=與起點同時 / 'prev'=接續上一階段 / {mirror:idx}=與第idx階段同起訖（時間相同）
+    var PHASES = [
+      {name:'原廠建廠及取得工廠登記證',                       grp:'原廠 669（既有丁建 · 前置）',              base:24, min:18, max:30, dep:'start',       cls:'orig'},
+      {name:'計畫書送審·水保·核發毗連證明與變更編定（免一階環評）', grp:'第一案 668（毗連丁建變更 · 與原廠同時申辦）', base:12, min:6,  max:24, dep:'start',       cls:''},
+      {name:'廠房興建與工廠登記變更',                         grp:'第一案 668（毗連丁建變更 · 與原廠同時申辦）', base:18, min:12, max:30, dep:'prev',        cls:''},
+      {name:'交通用地變更審查（出流管制·水保，路徑單純）',       grp:'第二案 672（改交通用地 · 與第一案並行）',     base:10, min:6,  max:18, dep:'start',       cls:'p2'},
+      {name:'路外停車場·接駁轉運站興建（＝第一案廠房興建同時段）', grp:'第二案 672（改交通用地 · 與第一案並行）',     base:18, min:12, max:30, dep:{mirror:2},   cls:'p2'}
+    ];
+    var dur = PHASES.map(function(p){ return p.base; });
+    var chart = document.getElementById('tl2-chart');
+    if(!chart) return;
+    var html='', lastGrp=null;
+    for(var i=0;i<PHASES.length;i++){
+      var p=PHASES[i], mir=(p.dep&&p.dep.mirror!=null);
+      if(p.grp!==lastGrp){ html+='<div class="g-phase">'+p.grp+'</div>'; lastGrp=p.grp; }
+      html+='<div class="g-task">'+
+        '<div class="g-name"><span class="g-nm">'+p.name+'</span><b class="g-mon" id="m2'+i+'"></b>'+
+        (mir ? '<span style="width:130px;flex:none;font-size:0.85em;color:#81c784;text-align:center;">↕ 同步</span>'
+             : '<input class="g-dur" type="range" min="'+p.min+'" max="'+p.max+'" value="'+p.base+'" data-idx="'+i+'">')+
+        '</div>'+
+        '<div class="g-track"><div class="g-fill '+p.cls+'" id="f2'+i+'"></div></div>'+
+        '</div>';
+    }
+    html+='<div class="g-buffer" id="tl2-buffer"><span class="gb-lbl">國土法上路後 · 變更編定關閉</span></div>';
+    html+='<div class="dday-line" id="tl2-dline"></div>';
+    html+='<div class="dday-flag" id="tl2-dflag">🚩 國土計畫法上路 D-day｜民國 120 年</div>';
+    html+='<div class="g-axis" id="tl2-axis"></div>';
+    chart.innerHTML=html;
+
+    function ym(m){ var a=START_ABS+Math.round(m); return '民國 '+Math.floor(a/12)+' 年 '+(a%12+1)+' 月'; }
+    function update(){
+      var st=[], en=[];
+      for(var i=0;i<PHASES.length;i++){
+        var d=PHASES[i].dep, s;
+        if(d==='start'){ s=0; }
+        else if(d==='prev'){ s=en[i-1]; }
+        else if(d&&d.mirror!=null){ s=st[d.mirror]; dur[i]=dur[d.mirror]; }   // 與指定階段同起訖
+        else { s=0; }
+        st[i]=s; en[i]=s+dur[i];
+      }
+      var total=Math.max.apply(null, en);
+      var axisMax=Math.max(total, DDAY+3);
+      axisMax=Math.ceil((axisMax-6)/12)*12+6;
+      var dpct=DDAY/axisMax*100;
+      for(var i=0;i<PHASES.length;i++){
+        var f=document.getElementById('f2'+i);
+        f.style.left=(st[i]/axisMax*100).toFixed(2)+'%';
+        f.style.width=(dur[i]/axisMax*100).toFixed(2)+'%';
+        document.getElementById('m2'+i).textContent=dur[i]+' 個月';
+      }
+      document.getElementById('tl2-buffer').style.left=dpct.toFixed(2)+'%';
+      document.getElementById('tl2-dline').style.left=dpct.toFixed(2)+'%';
+      document.getElementById('tl2-dflag').style.left=dpct.toFixed(2)+'%';
+      var ax='<span class="tk" style="left:0%;"></span><span class="tl-lbl" style="left:0%; transform:none;">115/07</span>';
+      for(var mo=6; mo<=axisMax-2; mo+=12){
+        var roc=Math.floor((START_ABS+mo)/12), pct=mo/axisMax*100, isD=(mo===DDAY);
+        ax+='<span class="tk" style="left:'+pct.toFixed(2)+'%;"></span><span class="tl-lbl'+(isD?' dday':'')+'" style="left:'+pct.toFixed(2)+'%;">'+roc+(isD?' D-day':'')+'</span>';
+      }
+      document.getElementById('tl2-axis').innerHTML=ax;
+      var stt=document.getElementById('tl2-status'), over=total-DDAY;
+      if(over>0.5){ stt.style.color='#ff5252'; stt.innerHTML='⚠ 全部完工：'+ym(total)+'（自起算 '+Math.round(total)+' 個月）　超過 D-day 約 <b>'+Math.round(over)+'</b> 個月'; }
+      else { stt.style.color='var(--success)'; stt.innerHTML='✓ 全部完工：'+ym(total)+'（自起算 '+Math.round(total)+' 個月）　於 D-day 前完成，餘裕 <b>'+Math.round(-over)+'</b> 個月'; }
+    }
+    chart.addEventListener('input', function(e){ var t=e.target; if(t.classList&&t.classList.contains('g-dur')){ dur[+t.getAttribute('data-idx')]=+t.value; update(); } });
+    update();
+    if(window.Reveal) Reveal.on('slidechanged', function(e){ if(e.currentSlide&&e.currentSlide.querySelector&&e.currentSlide.querySelector('#tl2-chart')) update(); });
   })();
 </script>
 </body>
